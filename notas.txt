@@ -1,0 +1,2 @@
+punto de arranque:
+dotnet run --project E-Commerce-App.WebUI/E-Commerce-App.WebUI.csproj

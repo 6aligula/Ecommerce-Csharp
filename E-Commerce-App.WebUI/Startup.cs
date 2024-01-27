@@ -38,8 +38,10 @@ namespace E_Commerce_App.WebUI
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
-            // DbContext
-            services.AddDbContext<AppDbContext>();
+            // Configuración de DbContext para la aplicación
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             // identity
             services.AddDbContext<UserContext>(options =>

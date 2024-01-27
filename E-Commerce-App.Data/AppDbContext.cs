@@ -7,10 +7,13 @@ namespace E_Commerce_App.Data
 {
     public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder.UseSqlServer(@"Server=localhost;Database=e-commerce-db;Trusted_Connection=True;");
+
+        // }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=SALIH; Initial Catalog=e-commerce-db;Integrated Security=True;
-                MultipleActiveResultSets = True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
