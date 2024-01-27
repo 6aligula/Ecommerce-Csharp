@@ -7,8 +7,8 @@
 <div class="row">
     <div class="col-md-3" style="position: -webkit-sticky; position: sticky; top: 7em;">
         <ul class="list-group">
-            <li class="list-group-item active">Profil</li>
-            <li class="list-group-item"><a href="my-orders">Siparişlerim</a></li>
+            <li class="list-group-item active">Perfil</li>
+            <li class="list-group-item"><a href="my-orders">Mis ordenes</a></li>
         </ul>
     </div>
     <div class="col-md-9">
@@ -17,29 +17,29 @@
                 <div class="card p-5">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Ad Soyad</label>
-                            <input class="form-control" placeholder="Teslim alacak kişinin adı" asp-for="@Model.FullName" />
+                            <label>Nombre y Apellido</label>
+                            <input class="form-control" placeholder="Nombre de la persona que recibe la entrega" asp-for="@Model.FullName" />
                             <span class="text-danger" asp-validation-for="@Model.FullName"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label>E-Mail</label>
-                            <input class="form-control" placeholder="Sistemdeki email adresiniz" asp-for="@Model.Email" readonly />
+                            <input class="form-control" placeholder="Su dirección de correo electrónico en el sistema" asp-for="@Model.Email" readonly />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Yeni Şifre</label>
+                            <label>Nueva contraseña</label>
                             <input type="password" class="form-control" asp-for="@Model.NewPassword" autocomplete="new-password" />
                             <span class="text-danger" asp-validation-for="@Model.NewPassword"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Yeni Şifre Tekrar</label>
+                            <label>Nueva contraseña de nuevo</label>
                             <input type="password" class="form-control" asp-for="@Model.RePassword" />
                             <span class="text-danger" asp-validation-for="@Model.RePassword"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-block p-2"><b>KAYDET</b></button>
+                        <button type="submit" class="btn btn-success btn-block p-2"><b>AHORRAR</b></button>
                     </div>
                 </div>
             </form>
@@ -66,7 +66,7 @@
                     }
                 },
                 error: function (err) {
-                    toastr.error("Beklenmedik bir hata meydana geldi");
+                    toastr.error("ocurrió un error inesperado");
                 }
             });
             return false;

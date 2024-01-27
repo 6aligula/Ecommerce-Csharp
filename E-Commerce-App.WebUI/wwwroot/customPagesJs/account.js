@@ -13,14 +13,14 @@
             processData: false,
             success: function (res) {
                 if (res.success) {
-                    toastr.success("Giriş başarılı.");
+                    toastr.success("Inicio de sesión correcto");
                     setTimeout(() => { window.location.href = res.redirectUrl; }, 1000);
                 } else {
                     toastr.warning(res.message);
                 }
             },
             error: function (err) {
-                toastr.error("Beklenmedik bir hata meydana geldi");
+                toastr.error("ocurrió un error inesperado");
             }
         });
         return false;
@@ -37,21 +37,21 @@
             success: async function (res) {
                 if (res.success) {
                     await Swal.fire(
-                        'Kayıt Başarılı !',
+                        'Registro exitoso !',
                         `${res.message}`,
                         'success'
                     )
                     window.location.href = res.redirectUrl;
                 } else {
                     Swal.fire(
-                        'Hata !',
+                        'Error !',
                         `${res.message}`,
                         'error'
                     )
                 }
             },
             error: function (err) {
-                toastr.error("Beklenmedik bir hata meydana geldi");
+                toastr.error("ocurrió un error inesperado");
             }
         });
         return false;

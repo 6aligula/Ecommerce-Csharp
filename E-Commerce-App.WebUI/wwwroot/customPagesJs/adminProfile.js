@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $('#user-account-form').on('submit', function (event) {
-        const REQUIRED_INPUT_MESSAGE = "Bu alanın doldurulması zorunludur."
+        const REQUIRED_INPUT_MESSAGE = "Este campo es obligatorio completarlo."
 
         $('#user-account-form').validate({
             rules: {
@@ -23,17 +23,17 @@
             messages: {
                 "FullName": {
                     required: REQUIRED_INPUT_MESSAGE,
-                    maxlength: "Bu alan en fazla 50 karakterden oluşabilir",
-                    minlength: "Bu alan en az 2 karakterden oluşabilir",
+                    maxlength: "Este campo puede contener hasta 50 caracteres.",
+                    minlength: "Este campo puede constar de al menos 2 caracteres.",
                 },
                 "NewPassword": {
-                    maxlength: "Bu alan en fazla 30 karakterden oluşabilir",
-                    minlength: "Bu alan en az 8 karakterden oluşabilir",
+                    maxlength: "Este campo puede contener hasta 30 caracteres.",
+                    minlength: "Este campo puede tener al menos 8 caracteres.",
                 },
                 "RePassword": {
-                    maxlength: "Bu alan en fazla 30 karakterden oluşabilir",
-                    minlength: "Bu alan en az 8 karakterden oluşabilir",
-                    equalTo: "Şifreler eşleşmiyor"
+                    maxlength: "Este campo puede contener hasta 30 caracteres.",
+                    minlength: "Este campo puede tener al menos 8 caracteres.",
+                    equalTo: "Las contraseñas no coinciden"
                 },
 
             },
@@ -64,7 +64,7 @@
                     success: async function (res) {
                         if (res.success) {
                             await Swal.fire(
-                                'Kayıt Başarılı !',
+                                'Registro exitoso !',
                                 `${res.message}`,
                                 'success'
                             )
@@ -75,12 +75,12 @@
                         }
                     },
                     error: function (err) {
-                        Swal.fire('Kayıt Hatası !', 'error')
+                        Swal.fire('¡Error de registro!', 'error')
                     }
                 })
                 return false;
             } catch (ex) {
-                Swal.fire('Kayıt Hatası !', 'error')
+                Swal.fire('¡Error de registro!', 'error')
             }
         }
         return false;

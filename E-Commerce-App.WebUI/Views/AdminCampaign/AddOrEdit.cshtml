@@ -11,11 +11,11 @@
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" placeholder="Kampanya Adı" />
+                <input asp-for="Name" class="form-control" placeholder="Nombre de campaña" />
             </div>
 
             <div class="form-group">
-                <label class="control-label">Kampanya Resmi</label><br />
+                <label class="control-label">Imagen de campaña</label><br />
                 <input type="file" name="campainImage" onchange="showpreview(this);" id="campainImageId" />
                 <hr />
                 <input type="hidden" asp-for="ImagePath" id="productMainImage" />
@@ -35,7 +35,7 @@
             </div>
             <div class="form-check form-check-inline">
                 <input type="checkbox" class="form-check-input" asp-for="IsHome" />
-                <label class="form-check-label" asp-for="IsHome">Ana Sayfada Görünsün mü ?</label>
+                <label class="form-check-label" asp-for="IsHome">¿Debería aparecer en la página de inicio?</label>
             </div>
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">

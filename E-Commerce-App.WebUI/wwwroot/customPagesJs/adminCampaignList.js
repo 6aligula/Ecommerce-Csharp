@@ -1,7 +1,7 @@
 ﻿removeCampaign = form => {
     Swal.fire({
-        title: "Silmek istediğinizden emin misiniz ?",
-        text: 'Silinen veri geri kullanılamaz!',
+        title: "¿Estas seguro que quieres borrarlo?",
+        text: '¡Los datos eliminados no se pueden recuperar!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -20,7 +20,7 @@
                     success: async function (res) {
                         $('#view-all').html(res.html);
                         await Swal.fire(
-                            'Silme Başarılı !',
+                            '¡Eliminación exitosa!',
                             `${res.message}`,
                             'success'
                         )

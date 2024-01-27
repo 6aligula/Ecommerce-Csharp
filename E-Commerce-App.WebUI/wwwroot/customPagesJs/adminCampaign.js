@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('#campaign-form').on('submit', function (event) {
 
-        const REQUIRED_INPUT_MESSAGE = "Bu alanın doldurulması zorunludur.";
+        const REQUIRED_INPUT_MESSAGE = "Este campo es obligatorio completarlo.";
 
         $('#campaign-form').validate({
             rules: {
@@ -30,8 +30,8 @@
                 },
                 campainImage: {
                     required: REQUIRED_INPUT_MESSAGE,
-                    extension: "Bu alan yalnızca resim dosyalarını kabul etmektedir.",
-                    maxsize: "Resim boyutu en fazla 2 MB olabilir",
+                    extension: "Esta área sólo acepta archivos de imágenes.",
+                    maxsize: "El tamaño de la imagen puede ser de hasta 2 MB",
                 }
             },
             errorElement: 'span',
@@ -67,7 +67,7 @@
                             $('#form-modal .modal-title').html('');
                             $('#form-modal').modal('hide');
                             Swal.fire(
-                                'Kayıt Başarılı !',
+                                'Registro exitoso !',
                                 `${res.message}`,
                                 'success'
                             )

@@ -27,12 +27,12 @@ function getPrice(data, index) {
         var discountedPrice = (data[index].price - ((data[index].price * data[index].discount) / 100)).toFixed(2);
 
 
-        html = `<p class="dress-card-para"><span class="dress-card-price">${discountedPrice + "&nbsp;₺"}</span>
-                    <span class="dress-card-crossed">${normalPrice}&nbsp;₺</span><small class="dress-card-off float-right">&ensp; (% ${data[index].discount})</small>
+        html = `<p class="dress-card-para"><span class="dress-card-price">${discountedPrice + "&nbsp;€"}</span>
+                    <span class="dress-card-crossed">${normalPrice}&nbsp;€</span><small class="dress-card-off float-right">&ensp; (% ${data[index].discount})</small>
                 </p>`
     }
     else {
-        html = `<p class="dress-card-para"><span class="dress-card-price">${normalPrice} &nbsp;₺ &ensp;</span></p>`;
+        html = `<p class="dress-card-para"><span class="dress-card-price">${normalPrice} &nbsp;€ &ensp;</span></p>`;
     }
     return html;
 }
@@ -51,7 +51,7 @@ function product(data, index) {
                     <hr/>
                     <p class="dress-card-para"> ${getPrice(data, index)} </p>
                     <div class="row">
-                        <div class="col-md-12 card-button"><a href="/product/${data[index].url}"><div class="card-button-inner">İncele </div></a></div>
+                        <div class="col-md-12 card-button"><a href="/product/${data[index].url}"><div class="card-button-inner">Revisar </div></a></div>
                     </div>
                 </div>
             </div>

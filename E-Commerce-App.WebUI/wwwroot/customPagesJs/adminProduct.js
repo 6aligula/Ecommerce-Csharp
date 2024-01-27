@@ -26,7 +26,7 @@
         $('#productUrl').val(url);
     });
 
-    const REQUIRED_INPUT_MESSAGE = "Bu alanın doldurulması zorunludur.";
+    const REQUIRED_INPUT_MESSAGE = "Este campo es obligatorio completarlo.";
 
     $('#product-form').validate({
         rules: {
@@ -62,23 +62,23 @@
             },
             "ProductDto.Price": {
                 required: REQUIRED_INPUT_MESSAGE,
-                minlength: "Ürün fiyatı en az 1₺ olabilir.",
-                maxlength: "Ürün fiyatı en fazla 100000₺ olabilir.",
+                minlength: "El precio del producto puede ser de al menos 1€",
+                maxlength: "El precio del producto puede ser de hasta X",
             },
             "ProductDto.Discount": {
-                minlength: "İndirim bedeli en az % 1 olabilir.",
-                maxlength: "Ürün fiyatı en fazla % 95 olabilir.",
+                minlength: "La tarifa de descuento puede ser de al menos el 1%.",
+                maxlength: "El precio del producto puede llegar hasta el 95%.",
             },
             "ProductDto.ShortDescription": {
                 required: REQUIRED_INPUT_MESSAGE,
             },
             mainImage: {
                 required: REQUIRED_INPUT_MESSAGE,
-                extension: "Yalnızca resim formatında ekleme yapabilirsiniz."
+                extension: "Sólo puedes agregar imágenes en formato de imagen."
             },
             "allImages": {
-                extension: "Yalnızca resim formatında ekleme yapabilirsiniz.",
-                maxsize: "Tüm resimler en fazla 20 MB boyutunda olabilir."
+                extension: "Sólo puedes agregar imágenes en formato de imagen",
+                maxsize: "Todas las imágenes pueden tener un tamaño de hasta 20 MB."
             }
         },
         errorElement: 'span',
@@ -121,14 +121,14 @@
                 success: function (res) {
                     if (res.isValid) {
                         Swal.fire(
-                            'Kayıt Başarılı !',
+                            'Registro exitoso !',
                             `${res.message}`,
                             'success'
                         )
                     }
                     else
                         Swal.fire(
-                            'Kayıt Hatası !',
+                            'Ha ocurrido un error!',
                             `${res.message}`,
                             'error'
                         )

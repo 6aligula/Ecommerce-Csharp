@@ -8,8 +8,8 @@
 <div class="row">
     <div class="col-md-3" style="position: -webkit-sticky; position: sticky; top: 7em;">
         <ul class="list-group">
-            <li class="list-group-item"><a href="@url">Profil</a></li>
-            <li class="list-group-item active">Siparişlerim</li>
+            <li class="list-group-item"><a href="@url">Perfil</a></li>
+            <li class="list-group-item active">Mis ordenes</li>
         </ul>
     </div>
     <div class="col-md-9">
@@ -19,8 +19,8 @@
                 {
                     <div style="text-align:center;">
                         <i class="fas fa-shopping-cart icon" style="font-size:2em;"></i>
-                        <h4>Henüz pazarda alışveriş yapmadınız.</h4>
-                        <span>Alışveriş listesini <b>E-Pazar'ın</b> fırsatlarla dolu dünyasından doldurmak için aşağıdaki ürünleri incelemeye başlayabilirsin.</span>
+                        <h4>Aún no has comprado en el mercado.</h4>
+                        <span>Puede comenzar a examinar los productos a continuación para completar su lista de compras en el mundo lleno de oportunidades</span>
                     </div>
                 }
                 else
@@ -30,11 +30,11 @@
                     for (int i = 0; i < list.orderItems.Count; i++)
                     {
                         var price = list.orderItems[i].Price;
-                        var orderState = list.orderItems[i].Order.OrderState == EnumOrderState.Paid ? "Ödendi, kargoyu bekliyor."
-                           : list.orderItems[i].Order.OrderState == EnumOrderState.InShipping ? "Kargoya verildi."
-                           : list.orderItems[i].Order.OrderState == EnumOrderState.Cancelled ? "İptal edildi."
-                           : list.orderItems[i].Order.OrderState == EnumOrderState.Completed ? "Teslim edildi."
-                           : "Sipariş Hatası";
+                        var orderState = list.orderItems[i].Order.OrderState == EnumOrderState.Paid ? "Pagado"
+                           : list.orderItems[i].Order.OrderState == EnumOrderState.InShipping ? "Enviado"
+                           : list.orderItems[i].Order.OrderState == EnumOrderState.Cancelled ? "Cancelado"
+                           : list.orderItems[i].Order.OrderState == EnumOrderState.Completed ? "Entregado"
+                           : "Error de orden";
 
 
                         <div class="p-2">
@@ -42,7 +42,7 @@
                                 <div class="col-md-3"><img src="/img/@list.orderItems[i].Product.MainImage" width="100" height="100" /></div>
                                 <div class="col-md-6">
                                     <h6>@list.orderItems[i].Product.Name</h6>
-                                    <h6><b>@(list.orderItems[i].Quantity) Adet</b></h6>
+                                    <h6><b>@(list.orderItems[i].Quantity) Pedazo</b></h6>
                                     <h6><b>@(price * list.orderItems[i].Quantity) TL</b></h6>
                                 </div>
                                 <div class="col-md-3">
@@ -57,12 +57,12 @@
                                     @if (list.orderItems[i].HasComment)
                                     {
                                         <a onclick="showInPopupWithId(@list.orderItems[i].Id, '@Url.Action("CommentAddOrEdit", "Order", new { id = list.ratings[i].Id }, Context.Request.Scheme)', 'Değerlendir')"
-                                           class="btn btn-secondary text-white"><i class="fas fa-pencil-alt"></i> Değerlendir</a>
+                                           class="btn btn-secondary text-white"><i class="fas fa-pencil-alt"></i> Evaluar</a>
                                     }
                                     else
                                     {
                                         <a onclick="showInPopupWithId(@list.orderItems[i].Id, '@Url.Action("CommentAddOrEdit", "Order", null, Context.Request.Scheme)','Değerlendir')"
-                                           class="btn btn-success btn-block text-white"><i class="fas fa-plus-circle"></i> Değerlendir</a>
+                                           class="btn btn-success btn-block text-white"><i class="fas fa-plus-circle"></i> Evaluar</a>
                                     }
                                     <hr />
                                     <p>@orderState</p>

@@ -6,30 +6,30 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Müşteri</th>
+            <th>Cliente</th>
             <th>@Html.DisplayNameFor(model => model.OrderDate)</th>
             <th>@Html.DisplayNameFor(model => model.TotalPrice)</th>
             <th>@Html.DisplayNameFor(model => model.OrderState)</th>
-            <th>Detaylar</th>
+            <th>Detalle</th>
         </tr>
     </thead>
     <tbody>
         @{var counter = 1; }
         @foreach (var item in Model)
         {
-            var orderState = item.OrderState == EnumOrderState.Paid ? "Ödendi, kargoyu bekliyor."
-                : item.OrderState == EnumOrderState.InShipping ? "Kargoya verildi."
-                : item.OrderState == EnumOrderState.Cancelled ? "İptal edildi."
-                : item.OrderState == EnumOrderState.Completed ? "Tamamlandı."
-                : "Sipariş Hatası";
+            var orderState = item.OrderState == EnumOrderState.Paid ? "Pagado"
+                : item.OrderState == EnumOrderState.InShipping ? "Enviado"
+                : item.OrderState == EnumOrderState.Cancelled ? "Cancelado"
+                : item.OrderState == EnumOrderState.Completed ? "Completado"
+                : "Error en la orden";
             var date = (DateTime)item.CreationDate;
             <tr>
                 <td style="text-align:center;"><b>@counter</b></td>
                 <td>@item.FirstName @item.LastName</td>
                 <td>@date.ToString("dd MMMM yyyy | HH:mm", CultureInfo.CreateSpecificCulture("tr"))</td>
-                <td>@item.TotalPrice ₺</td>
+                <td>@item.TotalPrice €</td>
                 <td>@orderState</td>
-                <td><a href="/Admin/Order/@item.Id" class="btn btn-primary btn-block">İncele</a></td>
+                <td><a href="/Admin/Order/@item.Id" class="btn btn-primary btn-block">Revisar</a></td>
                 @{counter++;}
             </tr>
         }

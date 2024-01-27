@@ -57,7 +57,7 @@ namespace E_Commerce_App.WebUI.Helpers
                 Id = "BY789",
                 Name = orderModel.OrderDto.FirstName,
                 Surname = orderModel.OrderDto.LastName,
-                GsmNumber = "+905555555555",
+                GsmNumber = "+34542545658",
                 Email = "info@test.com",
                 IdentityNumber = "74300864791",
                 LastLoginDate = "2015-10-05 12:43:35",

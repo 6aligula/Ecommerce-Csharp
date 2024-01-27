@@ -54,8 +54,8 @@ removeCartItem = productId => {
             success: async function (res) {
                 if (res.success) {
                     await Swal.fire(
-                        'Silme Başarılı !',
-                        `Ürün sepetten kaldırıldı.`,
+                        '¡Eliminación exitosa!',
+                        `El producto ha sido retirado del carrito.`,
                         'success'
                     )
                     $("#cartItems").html("");

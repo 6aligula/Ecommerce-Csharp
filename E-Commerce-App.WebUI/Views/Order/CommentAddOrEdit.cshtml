@@ -12,15 +12,15 @@
             <input type="hidden" asp-for="@Model.HasComment" />
             <input type="hidden" asp-for="@Model.Rating.OrderItemId" />
             <div class="form-group">
-                <label asp-for="@Model.Rating.Comment" class="control-label">Yorum</label>
+                <label asp-for="@Model.Rating.Comment" class="control-label">Comentario</label>
                 <div class="input-group">
                     <textarea asp-for="@Model.Rating.Comment" class="form-control" id="categoryName" placeholder="Yorumunuz"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Rating.Point">Puan</label>
+                <label asp-for="@Model.Rating.Point">Punto</label>
                 <select asp-for="@Model.Rating.Point" class="form-control">
-                    <option value="">Seçiniz...</option>
+                    <option value="">Elegir...</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -37,5 +37,5 @@
     </div>
 </div>
 
-<!-- Comment Add Edit Custom JS yetmesse validatörü ekle -->
+<!-- Comment Add Edit Custom JS  -->
 <script src="~/customPagesJs/orderComment.js"></script>

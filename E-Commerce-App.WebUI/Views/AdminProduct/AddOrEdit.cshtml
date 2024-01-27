@@ -1,16 +1,16 @@
 ﻿@model E_Commerce_App.WebUI.ViewModels.ProductViewModel
 @if (!string.IsNullOrEmpty(ViewData["ProductId"].ToString()))
 {
-    ViewData["SubPage"] = "Ürünler";
-    ViewData["SubPageUrl"] = "Product";
-    ViewData["CurrentPage"] = "Düzenle / " + ViewData["ProductId"];
+    ViewData["SubPage"] = "Productos";
+    ViewData["SubPageUrl"] = "Producto";
+    ViewData["CurrentPage"] = "Editar / " + ViewData["ProductId"];
     ViewData["CurrentPageUrl"] = "Product/Edit/" + ViewData["ProductId"];
 }
 else
 {
-    ViewData["SubPage"] = "Ürünler";
-    ViewData["SubPageUrl"] = "Product";
-    ViewData["CurrentPage"] = "Ürün Ekle";
+    ViewData["SubPage"] = "Productos";
+    ViewData["SubPageUrl"] = "Producto";
+    ViewData["CurrentPage"] = "Agregar producto";
     ViewData["CurrentPageUrl"] = "Product/Add/";
 }
 
@@ -30,10 +30,10 @@ else
     <div class="row">
         <div class="col-md-8">
             <div class="card p-2">
-                <label>Ürün Özellikleri</label>
+                <label>Características del producto</label>
                 <div class="form-row">
                     <div class="col-md-6 form-group">
-                        <input type="text" class="form-control" id="productName" asp-for="ProductDto.Name" placeholder="Ürün Adı" />
+                        <input type="text" class="form-control" id="productName" asp-for="ProductDto.Name" placeholder="Nombre del producto" />
                     </div>
                     <div class="col-md-6 form-group">
                         <input type="text" asp-for="ProductDto.Url" id="productUrl" class="form-control" readonly />
@@ -42,27 +42,27 @@ else
                 <br />
                 <div class="form-row">
                     <div class="col-md-6 form-group">
-                        <input type="number" step="0.1" min="1" max="1000000" class="form-control" id="productPrice" asp-for="ProductDto.Price" placeholder="Ürün Fiyatı" />
+                        <input type="number" step="0.1" min="1" max="1000000" class="form-control" id="productPrice" asp-for="ProductDto.Price" placeholder="Precio del producto" />
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="number" step="0.1" min="1" max="90" class="form-control" id="productDiscount" asp-for="ProductDto.Discount" placeholder="İndirim %" />
+                        <input type="number" step="0.1" min="1" max="90" class="form-control" id="productDiscount" asp-for="ProductDto.Discount" placeholder="Descuento %" />
                     </div>
                 </div>
                 <br />
                 <div class="form-group">
-                    <textarea asp-for="ProductDto.ShortDescription" id="productShortDescription" maxlength="240" class="form-control" placeholder="Ön açıklama yazınızı buraya giriniz."></textarea>
+                    <textarea asp-for="ProductDto.ShortDescription" id="productShortDescription" maxlength="240" class="form-control" placeholder="Ingrese su declaración preliminar aquí."></textarea>
                 </div>
                 <br />
                 <div class="form-group">
                     <textarea id="html-editor" asp-for="ProductDto.Description">
-                    Ürünün Detaylı Açıklamasını Burada Yapınız
+                    Proporcione una descripción detallada del producto aquí
                 </textarea>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card p-2">
-                <label>Kategoriler</label>
+                <label>Categorias</label>
                 <div class="bg-gradient-secondary p-2" style="border-radius:10px;">
                     @foreach (var category in Model.Categories)
                     {
@@ -75,7 +75,7 @@ else
                     }
                 </div>
                 <hr />
-                <label>Renkler</label>
+                <label>Colores</label>
                 <div class="bg-gradient-secondary p-2" style="border-radius:10px;">
                     @foreach (var color in Model.Colors)
                     {
@@ -93,16 +93,16 @@ else
                 <hr />
                 <div class="form-check form-check-inline">
                     <input type="checkbox" class="form-check-input" asp-for="ProductDto.IsHome" />
-                    <label class="form-check-label" asp-for="ProductDto.IsHome">Satışa Çıkarılsın mı ?</label>
+                    <label class="form-check-label" asp-for="ProductDto.IsHome">¿Debería ponerse a la venta?</label>
                 </div>
                 <br />
-                <button type="submit" id="btnSubmit" class="btn btn-primary btn-block">Kaydet</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary btn-block">Ahorrar</button>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card p-2">
                 <div class="form-group">
-                    <label>Ana Resim</label>
+                    <label>Imagen principal</label>
                     <input type="file" name="mainImage" onchange="showpreview(this);" id="mainImageId" class="input-btn" />
                     <hr />
                     <input type="hidden" asp-for="ProductDto.MainImage" id="productMainImage" />
@@ -120,7 +120,7 @@ else
         <div class="col-md-8">
             <div class="card p-2">
                 <div class="form-group">
-                    <label>Ürün Resimleri</label>
+                    <label>Imágenes del producto</label>
                     <input type="file" name="allImages" multiple onchange="previewFiles();" id="browse" class="input-btn" />
                     <hr />
                     <div id="preview">

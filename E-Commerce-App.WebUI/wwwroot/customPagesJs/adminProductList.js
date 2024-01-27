@@ -7,8 +7,8 @@
 
 function removeProduct(id) {
     Swal.fire({
-        title: "Silmek istediğinizden emin misiniz ?",
-        text: 'Silinen veri geri kullanılamaz!',
+        title: "¿Estas seguro que quieres borrarlo?",
+        text: '¡Los datos eliminados no se pueden recuperar!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -28,7 +28,7 @@ function removeProduct(id) {
                     success: async function (res) {
                         console.log(res);
                         await Swal.fire(
-                            'Silme Başarılı !',
+                            '¡Eliminación exitosa!',
                             `${res.message}`,
                             'success'
                         )
@@ -37,7 +37,7 @@ function removeProduct(id) {
                     error: function (err) {
                         console.log(err.responseText);
                         Swal.fire(
-                            'Silme Hatası !',
+                            '¡Error de eliminación!',
                             `${err}`,
                             'error'
                         )

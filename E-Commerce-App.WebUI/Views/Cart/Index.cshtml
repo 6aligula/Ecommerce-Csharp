@@ -6,7 +6,7 @@
 <div><br /><br /><br /><br /></div>
 @if (Model.CartItems.Count > 0)
 {
-    <h4>Sepetim</h4>
+    <h4>Mi carrito</h4>
     <div class="row">
         <div class="col-md-9 mb-2">
             <div class="card p-5 shadow" id="cartItems">
@@ -14,9 +14,9 @@
         </div>
         <div class="col-md-3" style="position: -webkit-sticky; position: sticky; top: 7em;">
             <div class="card p-3 shadow">
-                <h6 class="mb-3">Ödenecek Tutar</h6>
+                <h6 class="mb-3">El monto a pagar</h6>
                 <h4 class="mb-5">@Model.GetTotalPrice() <small><b>TL</b></small></h4>
-                <a class="btn btn-outline-primary" href="/order/checkout">Alışverişi tamamla</a>
+                <a class="btn btn-outline-primary" href="/order/checkout">Compras completadas</a>
             </div>
         </div>
     </div>
@@ -25,8 +25,8 @@ else
 {
     <div style="text-align:center;">
         <i class="fas fa-shopping-cart icon" style="font-size:2em;"></i>
-        <h4>Sepetin şu an boş</h4>
-        <span>Sepetini <b>E-Pazar'ın</b> fırsatlarla dolu dünyasından doldurmak için aşağıdaki ürünleri incelemeye başlayabilirsin.</span>
+        <h4>Su carrito está vacío</h4>
+        <span>Tu carrito <b>del mercado electrónico</b> Puede comenzar a examinar los productos a continuación para llenar el mundo de oportunidades.</span>
     </div>
 }
 

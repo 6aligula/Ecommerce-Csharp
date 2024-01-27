@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "salih",
+  "author": "Luis",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",

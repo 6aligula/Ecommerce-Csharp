@@ -39,7 +39,7 @@
                 success: function (res) {
                     if (res.success) {
                         Swal.fire(
-                            'Kayıt Başarılı !',
+                            'Registro exitoso !',
                             `${res.message}`,
                             'success'
                         )
@@ -52,7 +52,7 @@
                 }
             });
         } catch (ex) {
-            toastr.success("Ürün sepete eklenemedi.")
+            toastr.success("El producto no se pudo agregar al carrito.")
         }
 
         event.preventDefault();

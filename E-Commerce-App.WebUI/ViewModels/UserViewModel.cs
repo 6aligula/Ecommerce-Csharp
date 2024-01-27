@@ -6,42 +6,42 @@ namespace E_Commerce_App.WebUI.ViewModels
     {
         public class UserAccountViewModel
         {
-            [Required(ErrorMessage = "Lütfen adınız ve soyadınızı giriniz.")]
-            [StringLength(maximumLength: 40, MinimumLength = 4, ErrorMessage = "Ad ve soyad 5 ile 40 karakter arasında olmalıdır.")]
+            [Required(ErrorMessage = "Por favor introduzca su nombre y apellido.")]
+            [StringLength(maximumLength: 40, MinimumLength = 4, ErrorMessage = "El nombre y apellido deben tener entre 5 y 40 caracteres.")]
             public string FullName { get; set; }
 
-            [Required(ErrorMessage = "Lütfen mail adresinizi giriniz.")]
+            [Required(ErrorMessage = "Por favor, introduzca su dirección de correo electrónico.")]
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
 
             [DataType(DataType.Password)]
-            [StringLength(maximumLength:30,MinimumLength =8, ErrorMessage ="Parola 8 ile 30 karakter arasında olmalıdır.")]
+            [StringLength(maximumLength:30,MinimumLength =8, ErrorMessage ="La contraseña debe tener entre 8 y 30 caracteres.")]
             public string NewPassword { get; set; }
             [DataType(DataType.Password)]
-            [Compare("NewPassword", ErrorMessage ="Şifreler aynı değil.")]
+            [Compare("NewPassword", ErrorMessage ="Las contraseñas no coinciden")]
             public string RePassword { get; set; }
         }
         public class RegisterViewModel
         {
-            [Required(ErrorMessage = "Lütfen adınız ve soyadınızı giriniz.")]
+            [Required(ErrorMessage = "Por favor introduzca su nombre y apellido.")]
             public string FullName { get; set; }
 
-            [Required(ErrorMessage = "Lütfen mail adresinizi giriniz.")]
+            [Required(ErrorMessage = "Por favor, introduzca su dirección de correo electrónico.")]
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Lütfen şifrenizi giriniz.")]
+            [Required(ErrorMessage = "Por favor, introduzca su contraseña.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
         }
         public class LoginViewModel
         {
-            [Required(ErrorMessage = "Lütfen mail adresinizi giriniz.")]
+            [Required(ErrorMessage = "Por favor, introduzca su dirección de correo electrónico.")]
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Lütfen şifrenizi giriniz.")]
+            [Required(ErrorMessage = "Por favor, introduzca su contraseña.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -55,7 +55,7 @@ namespace E_Commerce_App.WebUI.ViewModels
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Lütfen şifrenizi giriniz.")]
+            [Required(ErrorMessage = "Por favor, introduzca su contraseña.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }

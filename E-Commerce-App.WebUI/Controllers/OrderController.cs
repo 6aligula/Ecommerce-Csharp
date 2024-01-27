@@ -118,13 +118,13 @@ namespace E_Commerce_App.WebUI.Controllers
                         model.Rating.DateOfUpdate = DateTime.Now;
                         _ratingService.Update(_mapper.Map<Rating>(model.Rating));
                     }
-                    return Json(new { isValid = true, success = true, message = Messages.JSON_CREATE_MESSAGE("Değerlendirme"), redirectUrl = "/my-orders" });
+                    return Json(new { isValid = true, success = true, message = Messages.JSON_CREATE_MESSAGE("Comentario"), redirectUrl = "/my-orders" });
                 }
-                return Json(new { isValid = false, success = false, message = Messages.JSON_CREATE_MESSAGE("Değerlendirme", false), redirectUrl = "/my-orders" });
+                return Json(new { isValid = false, success = false, message = Messages.JSON_CREATE_MESSAGE("Comentario", false), redirectUrl = "/my-orders" });
             }
             catch (Exception)
             {
-                return Json(new { isValid = false, success = false, message = Messages.JSON_CREATE_MESSAGE("Değerlendirme", false), redirectUrl = "/my-orders" });
+                return Json(new { isValid = false, success = false, message = Messages.JSON_CREATE_MESSAGE("Comentario", false), redirectUrl = "/my-orders" });
             }
         }
 
@@ -170,7 +170,7 @@ namespace E_Commerce_App.WebUI.Controllers
                 {
                     await PaymentHelper.SaveOrder(_mapper, _orderService, orderModel, payment, userId);
                     await _cartService.ResetCart(cart.Id);
-                    return Json(new { success=true, message = "Sipariş başarılı." });
+                    return Json(new { success=true, message = "El pedido es exitoso." });
                 }
                 else
                 {

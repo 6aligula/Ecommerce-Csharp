@@ -46,16 +46,16 @@
                                 @if (product.Discount != null && product.Discount > 0)
                                 {
                                     <span>
-                                        @Math.Round(discountedPrice, 2) ₺
+                                        @Math.Round(discountedPrice, 2) €
                                     </span>
                                     <span class="line-through">
-                                        @price ₺
+                                        @price €
                                     </span>
                                     <input type="hidden" name="price" value="@discountedPrice" />
                                 }
                                 else
                                 {
-                                    <span>@price ₺</span>
+                                    <span>@price €</span>
                                     <input type="hidden" name="price" value="@price" />
                                 }
                             </div>
@@ -68,7 +68,7 @@
                                     <input type="hidden" name="productId" value="@product.Id">
                                     @if (Model.SelectedColors.Count() > 0)
                                     {
-                                        <label for="size">Renk</label><br />
+                                        <label for="size">Color</label><br />
                                         <div class="toolbar">
                                             <div id="myColorSelector" class="colorSelector">
 
@@ -90,7 +90,7 @@
                                 <div class="product-count">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <small>Adet</small>
+                                            <small>Pedazo</small>
                                             <div class="display-flex">
                                                 <div class="qtyminus">-</div>
                                                 <input type="text" name="quantity" value="1" class="qty">
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-md-6">
 
-                                            <button type="submit" class="float-right round-black-btn">Sepete Ekle</button>
+                                            <button type="submit" class="float-right round-black-btn">Añadir al carrito</button>
 
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                         }
                         else
                         {
-                            <small class="text-danger">Ürün listeden kaldırılmıştır.</small>
+                            <small class="text-danger">El producto ha sido eliminado de la lista.</small>
                         }
                     </div>
                 </div>
@@ -117,10 +117,10 @@
             <div class="product-info-tabs">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Ürün Açıklaması</a>
+                        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Descripción del Producto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Değerlendirmeler (@Model.Ratings.Count)</a>
+                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reseñas (@Model.Ratings.Count)</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -132,7 +132,7 @@
                             <div class="card-body">
                                 @if (Model.Ratings.Count < 1)
                                 {
-                                    <p class="mb-20">Bu ürün için henüz bir değerlendirme yapılmadı.</p>
+                                    <p class="mb-20">No hay comentarios aún para este producto.</p>
                                 }
                                 else
                                 {

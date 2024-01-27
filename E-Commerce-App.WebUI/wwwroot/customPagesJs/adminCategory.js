@@ -23,7 +23,7 @@
     // Submit category add edit form
     $('#category-form').on('submit', function (event) {
 
-        const REQUIRED_INPUT_MESSAGE = "Bu alanın doldurulması zorunludur."
+        const REQUIRED_INPUT_MESSAGE = "Este campo es obligatorio completarlo."
 
         $('#category-form').validate({
             rules: {
@@ -69,7 +69,7 @@
                             $('#form-modal .modal-title').html('');
                             $('#form-modal').modal('hide');
                             await Swal.fire(
-                                'Kayıt Başarılı !',
+                                'Registro exitoso !',
                                 `${res.message}`,
                                 'success'
                             )
@@ -79,12 +79,12 @@
                             $('#form-modal .modal-body').html(res.html);
                     },
                     error: function (err) {
-                        Swal.fire('Kayıt Hatası !', 'error')
+                        Swal.fire('¡Error de registro!', 'error')
                     }
                 })
                 return false;
             } catch (ex) {
-                Swal.fire('Kayıt Hatası !', 'error')
+                Swal.fire('¡Error de registro!', 'error')
             }
         }
         event.preventDefault();

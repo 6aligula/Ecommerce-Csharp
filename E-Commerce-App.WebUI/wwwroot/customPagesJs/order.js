@@ -37,7 +37,7 @@
     // get districts from json file after city changed
     $("#il").on("change", function () {
         var il = $(this).val();
-        $("#ilce").attr("disabled", false).html("<option value=''>Seçin..</option>");
+        $("#ilce").attr("disabled", false).html("<option value=''>Elegir...</option>");
         $.getJSON("/json/tr-iller-ilceler.json", function (sonuc) {
             $.each(sonuc, function (index, value) {
                 var row = "";
@@ -52,7 +52,7 @@
 
 
     // Validate Payment Form
-    const REQUIRED_INPUT_MESSAGE = "Bu alanın doldurulması zorunludur.";
+    const REQUIRED_INPUT_MESSAGE = "Este campo es obligatorio completarlo.";
     $('#payment-form').validate({
         rules: {
             "OrderDto.FirstName": {
@@ -179,7 +179,7 @@
                 success: async function (res) {
                     if (res.success) {
                         await Swal.fire(
-                            'Sipariş Başarılı !',
+                            '¡Orden exitosa!',
                             `${res.message}`,
                             'success'
                         )
@@ -187,7 +187,7 @@
                     }
                     else
                         Swal.fire(
-                            'Kayıt Hatası !',
+                            '¡Error de registro!',
                             `${res.message}`,
                             'error'
                         )
@@ -199,7 +199,7 @@
         }
         else {
             event.preventDefault();
-            toastr.warning("Lütfen gerekli alanları doldurun.")
+            toastr.warning("Por favor llene los campos requeridos.")
         }
     });
 

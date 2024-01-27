@@ -14,15 +14,15 @@
         <form asp-controller="Account" asp-action="Login" id="login-form">
             <div class="con">
                 <header class="head-form">
-                    <h2>E-Pazar</h2>
-                    <p>Email adresinizi ve parolanızı giriniz.</p>
+                    <h2>Mercado electrónico</h2>
+                    <p>Introduzca su dirección de correo electrónico y contraseña.</p>
                 </header>
                 <br>
                 <div class="field-set">
                     <span class="input-item">
                         <i class="fa fa-user-circle"></i>
                     </span>
-                    <input type="text" class="form-input" asp-for="@Model.Email" id="txt-input" placeholder="Email adres" required>
+                    <input type="text" class="form-input" asp-for="@Model.Email" id="txt-input" placeholder="Email address" required>
                     <br>
                     <span class="input-item">
                         <i class="fa fa-key"></i>
@@ -32,12 +32,12 @@
                         <i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i>
                     </span>
                     <br>
-                    <button class="log-in"> Giriş Yap </button>
+                    <button class="log-in"> Acceso </button>
                 </div>
                 <div class="other">
-                    <button class="btn submits frgt-pass">Şifremi Unuttum</button>
+                    <button class="btn submits frgt-pass">Olvidé mi contraseña</button>
                     <button class="btn submits sign-up">
-                        Kayıt Ol
+                        Registro
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
                     </button>
                 </div>

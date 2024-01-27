@@ -11,7 +11,7 @@
             <th>@Html.DisplayNameFor(model => model.Url)</th>
             <th> @Html.DisplayNameFor(model => model.CreationDate)</th>
             <th>
-                <a href="/Admin/Product/Add" class="btn btn-success btn-block text-white"><i class="fas fa-plus-circle"></i> Yeni Ürün</a>
+                <a href="/Admin/Product/Add" class="btn btn-success btn-block text-white"><i class="fas fa-plus-circle"></i> Nuevo producto</a>
             </th>
         </tr>
     </thead>
@@ -44,7 +44,7 @@
                     }
                     @productName
                 </td>
-                <td><b>@absPrice ₺</b></td>
+                <td><b>@absPrice €</b></td>
                 <td>
                     @{
                         var productUrl = "";
@@ -57,9 +57,9 @@
                 <td>@date.ToString("dd MMMM yyyy | HH:mm", CultureInfo.CreateSpecificCulture("tr"))</td>
                 <td>
                     <div>
-                        <a href="/Admin/Product/Edit/@item.Id" class="btn btn-secondary text-white"><i class="fas fa-pencil-alt"></i>&nbsp;Düzenle</a>
+                        <a href="/Admin/Product/Edit/@item.Id" class="btn btn-secondary text-white"><i class="fas fa-pencil-alt"></i>&nbsp;Editar</a>
                         <a class="btn btn-danger" onclick="removeProduct('@item.Id');">
-                            <i class="fa fa-trash">&nbsp; Sil</i>
+                            <i class="fa fa-trash">&nbsp; Borrar</i>
                         </a>
                     </div>
                 </td>

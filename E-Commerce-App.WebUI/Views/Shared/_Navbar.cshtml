@@ -7,13 +7,13 @@
                 <a class="navbar-brand a-hover" href="/">
                     <img src="/images/docker.svg" height="40" class="d-inline-block align-top" alt="" href="/">
                 </a>
-                <a href="/Admin/Dashboard"> E-Pazar Yönetim Paneli</a>
+                <a href="/Admin/Dashboard"> Panel de gestión del mercado electrónico</a>
             }
             else
             {
                 <a class="navbar-brand a-hover" href="/">
                     <img src="/images/docker.svg" height="40" class="d-inline-block align-top" alt="">
-                    E-Pazar
+                    Mercado electrónico
                 </a>
             }
         }
@@ -21,7 +21,7 @@
         {
             <a class="navbar-brand a-hover" href="/">
                 <img src="/images/docker.svg" height="40" class="d-inline-block align-top" alt="">
-                E-Pazar
+                Mercado electrónico
             </a>
         }
     </div>
@@ -32,7 +32,7 @@
         <div class="col-md-6">
             <form action="/Home/Index">
                 <div class="input-group">
-                    <input type="text" id="searchForm" class="form-control" name="query" value="@ViewData["query"]" placeholder="Aramak istediğiniz ürünü yazın." style="border-radius: 16px 0px 0px 16px;outline: 0 !important;" required />
+                    <input type="text" id="searchForm" class="form-control" name="query" value="@ViewData["query"]" placeholder="Escribe el producto que deseas buscar." style="border-radius: 16px 0px 0px 16px;outline: 0 !important;" required />
                     <div class="input-group-append">
                         <button class="btn text-white" type="submit" id="btn-search">
                             <i class="fa fa-search"></i>
@@ -48,13 +48,13 @@
             {
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/my-orders" id="usernameArea"><i class="fa fa-user"></i>&nbsp; Hesabım</a>
+                        <a class="nav-link a-hover" href="/my-orders" id="usernameArea"><i class="fa fa-user"></i>&nbsp; Mi cuenta</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Sepetim</a>
+                        <a class="nav-link a-hover" href="/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Mi carrito</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/Account/Logout"><i class="fa fa-sign-out-alt"></i>&nbsp;Çıkış Yap</a>
+                        <a class="nav-link a-hover" href="/Account/Logout"><i class="fa fa-sign-out-alt"></i>&nbsp;Cerrar sesión</a>
                     </li>
                 </ul>
             }
@@ -62,10 +62,10 @@
             {
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/Account/Login"><i class="fa fa-user"></i> Giriş Yap</a>
+                        <a class="nav-link a-hover" href="/Account/Login"><i class="fa fa-user"></i> Acceso</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/Account/Register"><i class="fa fa-user"></i> Kayıt Ol</a>
+                        <a class="nav-link a-hover" href="/Account/Register"><i class="fa fa-user"></i> Registro</a>
                     </li>
                 </ul>
             }

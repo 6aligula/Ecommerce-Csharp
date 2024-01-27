@@ -6,7 +6,7 @@ namespace E_Commerce_App.WebUI.ViewModels
 {
     public class CommentViewModel
     {
-        // orderın yorumunu güncelle
+        // Actualizar el comentario del pedido.
         // 
         public int OrderItemId { get; set; }
         public bool HasComment { get; set; }

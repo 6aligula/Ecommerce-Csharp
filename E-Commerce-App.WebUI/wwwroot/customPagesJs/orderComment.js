@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    const REQUIRED_INPUT_MESSAGE = "Bu alanın doldurulması zorunludur.";
+    const REQUIRED_INPUT_MESSAGE = "Este campo es obligatorio completarlo.";
     // Validate comment form
     $('#comment-form').validate({
         rules: {
@@ -60,12 +60,12 @@
                             $('#form-modal .modal-body').html(res.html);
                     },
                     error: function (err) {
-                        Swal.fire('Kayıt Hatası !', 'error')
+                        Swal.fire('¡Error de registro!', 'error')
                     }
                 })
                 return false;
             } catch (ex) {
-                Swal.fire('Kayıt Hatası !', 'error')
+                Swal.fire('¡Error de registro!', 'error')
             }
         }
         return false;

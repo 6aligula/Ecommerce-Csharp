@@ -37,10 +37,10 @@
 
             totalPages: @Model.PageInfo.GetTotalPage(),
             visiblePages: 6,
-            next: 'Sonraki',
-            prev: 'Önceki',
-            last: 'Son',
-            first:'İlk',
+            next: 'Próximo',
+            prev: 'Anterior',
+            last: 'Fin',
+            first:'Primero',
             onPageClick: function (event, page) {
 
                 var url = "@Context.Request.Path@Context.Request.QueryString";

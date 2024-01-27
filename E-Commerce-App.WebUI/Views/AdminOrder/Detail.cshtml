@@ -1,6 +1,6 @@
 ﻿@model E_Commerce_App.WebUI.ViewModels.OrderViewModel
 @{
-    ViewData["SubPage"] = "Siparişler";
+    ViewData["SubPage"] = "Pedidos";
     ViewData["SubPageUrl"] = "Order";
     ViewData["CurrentPage"] = ViewData["OrderId"];
     ViewData["CurrentPageUrl"] = "Order/" + ViewData["OrderId"];
@@ -11,7 +11,7 @@
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Siparişler</h3>
+                <h3 class="card-title">Pedidos</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
@@ -31,7 +31,7 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-7">
                                 <h6>@item.Product.Name</h6>
-                                <h6><b>@(item.Quantity) Adet</b></h6>
+                                <h6><b>@(item.Quantity) Cantidad</b></h6>
                                 <h6><b>@(price * item.Quantity) TL</b></h6>
                                 <h6><b>@item.SelectedColor</b></h6>
                             </div>
@@ -45,7 +45,7 @@
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Sipariş Durumu</h3>
+                <h3 class="card-title">Estado del pedido</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
@@ -57,39 +57,39 @@
             </div>
             <div class="card-body">
                 @{
-                    var orderState = Model.OrderDto.OrderState == EnumOrderState.Paid ? "Ödendi, kargoyu bekliyor."
-                        : Model.OrderDto.OrderState == EnumOrderState.InShipping ? "Kargoya verildi."
-                        : Model.OrderDto.OrderState == EnumOrderState.Cancelled ? "İptal edildi."
-                        : Model.OrderDto.OrderState == EnumOrderState.Completed ? "Tamamlandı."
-                        : "Sipariş Hatası";
+                    var orderState = Model.OrderDto.OrderState == EnumOrderState.Paid ? "Pagado"
+                        : Model.OrderDto.OrderState == EnumOrderState.InShipping ? "Enviado"
+                        : Model.OrderDto.OrderState == EnumOrderState.Cancelled ? "Cancelado"
+                        : Model.OrderDto.OrderState == EnumOrderState.Completed ? "Completado."
+                        : "Error en la orden";
 
                     var date = Model.OrderDto.OrderDate;
                     string orderDate = date.ToString("dd MMMM yyyy HH:mm", CultureInfo.CreateSpecificCulture("tr"));
                 }
-                <h3 class="mt-2"><b>@orderDate</b> | Sipariş No : <b>@Model.OrderDto.ConversationId.Split("_")[0]</b></h3>
+                <h3 class="mt-2"><b>@orderDate</b> | Número de orden : <b>@Model.OrderDto.ConversationId.Split("_")[0]</b></h3>
                 <hr />
-                <h4 class="mt-2 text-center">Sipariş Durumu : <b class="text-danger">@orderState</b></h4>
+                <h4 class="mt-2 text-center">Estado del pedido : <b class="text-danger">@orderState</b></h4>
                 <hr />
                 <h6>
-                    Adres : <b>@Model.OrderDto.Address | @Model.OrderDto.City | @Model.OrderDto.District</b>
+                    Dirección : <b>@Model.OrderDto.Address | @Model.OrderDto.City | @Model.OrderDto.District</b>
                 </h6>
                 <hr />
                 <h6>
-                    Alıcı : <b>@Model.OrderDto.FirstName @Model.OrderDto.LastName</b>
+                    Comprador : <b>@Model.OrderDto.FirstName @Model.OrderDto.LastName</b>
                 </h6>
                 <hr />
                 @if (Model.OrderDto.OrderState != EnumOrderState.Cancelled)
                 {
-                    <h6>Sipariş Durumunu Güncelle</h6>
+                    <h6>Actualizar estado del pedido</h6>
                     <form asp-controller="AdminOrder" asp-action="EditOrderState" id="form-order-state">
                         <input type="hidden" asp-for="@Model.OrderDto.Id" id="order-no" />
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <select asp-for="OrderDto.OrderState" class="form-control">
-                                    <option value="">Seçiniz...</option>
-                                    <option value="@EnumOrderState.InShipping">Kargoya verildi.</option>
-                                    <option value="@EnumOrderState.Completed">Tamamlandı.</option>
-                                    <option value="@EnumOrderState.Cancelled">İptal edildi.</option>
+                                    <option value="">Elegir...</option>
+                                    <option value="@EnumOrderState.InShipping">Ha sido enviado.</option>
+                                    <option value="@EnumOrderState.Completed">Completado.</option>
+                                    <option value="@EnumOrderState.Cancelled">Cancelado.</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
