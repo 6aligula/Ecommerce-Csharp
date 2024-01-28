@@ -50,13 +50,11 @@ namespace E_Commerce_App.WebUI.ViewModels
         public class ResetPasswordViewModel
         {
             [Required]
+            public string UserId { get; set; }
+
+            [Required]
             public string Token { get; set; }
-
-            [Required(ErrorMessage = "El correo electrónico es obligatorio.")]
-            [EmailAddress(ErrorMessage = "Debe ingresar un correo electrónico válido.")]
-            [DataType(DataType.EmailAddress)]
-            public string Email { get; set; }
-
+            
             [Required(ErrorMessage = "Por favor, introduzca su nueva contraseña.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }

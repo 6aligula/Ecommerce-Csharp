@@ -82,11 +82,18 @@ namespace E_Commerce_App.WebUI.Controllers
             await _signInManager.SignOutAsync();
             return Redirect("~/");
         }
+
+        // Método GET para mostrar la vista de restablecimiento de contraseña
+        [HttpGet]
         public IActionResult ResetPassword(string userId, string token)
         {
             if (userId == null || token == null) return RedirectToAction("Index", "Home");
-            var model = new ResetPasswordViewModel { Token = token };
-            return View();
+            var model = new ResetPasswordViewModel
+            {
+                UserId = userId,
+                Token = token
+            };
+            return View(model);
         }
         // Helper
         private async Task<bool> EmailExist(string email)
@@ -238,13 +245,38 @@ namespace E_Commerce_App.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null) return RedirectToAction("Index", "Home");
+                Console.WriteLine($"Intentando restablecer la contraseña para el usuario: {model.UserId}");
+                var user = await _userManager.FindByIdAsync(model.UserId);
+                if (user == null)
+                {
+                    // No revelar que el usuario no existe
+                    Console.WriteLine($"No se encontró un usuario con el correo: {model.UserId}");
+                    TempData["ErrorMessage"] = "Ha ocurrido un error al restablecer tu contraseña.";
+                    return RedirectToAction("forgotpassword", "Account");
+                }
 
+                Console.WriteLine($"Restableciendo la contraseña para el usuario: {model.UserId}");
                 var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
-                if (result.Succeeded) return RedirectToAction("Login", "Account");
+                if (result.Succeeded)
+                {
+                    Console.WriteLine($"La contraseña para el usuario {model.UserId} ha sido restablecida con éxito.");
+                    TempData["SuccessMessage"] = "Tu contraseña ha sido restablecida con éxito.";
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    // Aquí puedes manejar diferentes tipos de errores, por ejemplo:
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                        Console.WriteLine($"Error al restablecer la contraseña para el usuario {model.UserId}: {error.Description}");
+                    }
+                }
             }
+
+            // Si llegamos hasta aquí, algo falló, vuelve a mostrar el formulario
             return View(model);
         }
+
     }
 }

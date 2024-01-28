@@ -65,7 +65,7 @@ namespace E_Commerce_App.WebUI.Controllers
             }
             foreach (var item in orderItems)
             {
-                var date = item.Order.OrderDate.ToString("dd MMMM yyyy | HH:mm", CultureInfo.CreateSpecificCulture("tr"));
+                var date = item.Order.OrderDate.ToString("dd MMMM yyyy | HH:mm", CultureInfo.CreateSpecificCulture("es-ES"));
                 orderDates.Add(date);
                 var rating = await _ratingService.SingleOrDefaultAsync(p => p.OrderItemId == item.Id);
                 if (rating == null) ratings.Add(new RatingDto());
