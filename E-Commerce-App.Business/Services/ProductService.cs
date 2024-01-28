@@ -58,5 +58,10 @@ namespace E_Commerce_App.Business.Services
             _unitOfWork.ProductRepository.RemoveProduct(product);
             _unitOfWork.Commit();
         }
+        public async Task<Product> GetProductByIdAsync(string id)
+        {
+            // Usa el repositorio para obtener el producto por su Id de tipo string
+            return await _unitOfWork.ProductRepository.SingleOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

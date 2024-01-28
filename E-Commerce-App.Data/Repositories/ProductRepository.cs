@@ -92,5 +92,10 @@ namespace E_Commerce_App.Data.Repositories
         {
           product.IsActive = false;
         }
+        public async Task<Product> GetProductByIdAsync(string id)
+        {
+            return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
     }
 }

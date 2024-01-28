@@ -32,6 +32,9 @@ namespace E_Commerce_App.Core.Shared.Mapping
             CreateMap<CartItem, CartItemDto>().ReverseMap();
 
             CreateMap<Rating, RatingDto>().ReverseMap();
+
+            CreateMap<Product, ProductDto>().ForMember(dest => dest.CountInStock, opt => opt.MapFrom(src => src.CountInStock));
+
         }
     }
 }

@@ -99,29 +99,35 @@ namespace E_Commerce_App.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit([FromForm] ProductDto productDto, IFormFile mainImage, List<IFormFile> allImages, int[] categoryIds, int[] colorIds)
         {
-
-            // TODO Verificar el estado de repetición de la URL y envíe el error correspondiente
             try
             {
                 if (ModelState.IsValid)
                 {
+                    Product productEntity;
                     if (string.IsNullOrEmpty(productDto.Id))
                     {
-                        var newProduct = await _crudHelper.ProductForAdd(productDto, mainImage, allImages, categoryIds, colorIds);
-                        await _productService.AddAsync(_mapper.Map<ProductDto, Product>(newProduct));
+                        // Creando un nuevo producto
+                        productEntity = _mapper.Map<ProductDto, Product>(productDto);
+                        // Suponiendo que quieres inicializar el stock a 0 si no se proporciona un valor
+                        productEntity.CountInStock = productDto.CountInStock > 0 ? productDto.CountInStock : 0;
+                        await _productService.AddAsync(productEntity);
                     }
                     else
                     {
-                        var editedProduct = await _crudHelper.ProductForEdit(productDto, mainImage, allImages, categoryIds, colorIds);
-                        _productService.Update(_mapper.Map<ProductDto, Product>(editedProduct));
+                        // Editando un producto existente
+                        productEntity = await _productService.GetProductByIdAsync(productDto.Id);
+                        _mapper.Map(productDto, productEntity);
+                        // No es necesario inicializar CountInStock, ya que debería venir del formulario
+                        _productService.Update(productEntity);
                     }
-                    return Json(new { isValid = true, message = Messages.JSON_CREATE_MESSAGE("Producto") });
+                    return Json(new { isValid = true, message = "Producto actualizado con éxito." });
                 }
-                return Json(new { isValid = false, message = "Por favor rellena todos los campos." });
+                return Json(new { isValid = false, message = "Por favor, rellena todos los campos." });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Json(new { isValid = false, message = Messages.JSON_CREATE_MESSAGE("Producto", false) });
+                // Manejo de excepciones...
+                return Json(new { isValid = false, message = "Ha ocurrido un error al procesar tu solicitud." ,ex });
             }
         }
 

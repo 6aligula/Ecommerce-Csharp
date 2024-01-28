@@ -54,6 +54,11 @@ else
                 </div>
                 <br />
                 <div class="form-group">
+                    <label for="CountInStock">Cantidad en Inventario</label>
+                    <input type="number" asp-for="ProductDto.CountInStock" class="form-control" />
+                </div>
+                <br />
+                <div class="form-group">
                     <textarea id="html-editor" asp-for="ProductDto.Description">
                     Proporcione una descripción detallada del producto aquí
                 </textarea>

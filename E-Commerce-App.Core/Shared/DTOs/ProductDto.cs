@@ -41,6 +41,8 @@ namespace E_Commerce_App.Core.Shared.DTOs
         [Display(Name = "Foto de cubierta")]
         public string MainImage { get; set; }
 
+        [Display(Name= "Cantidad del producto")]
+        public int CountInStock { get; set; }
 
         public ICollection<ImageDto> Images { get; set; }
         public ICollection<ProductColorDto> ProductColors { get; set; }

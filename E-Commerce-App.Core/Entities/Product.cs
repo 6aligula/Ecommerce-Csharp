@@ -13,6 +13,7 @@ namespace E_Commerce_App.Core.Entities
         public string Description { get; set; }
         public bool IsHome { get; set; }
         public string MainImage { get; set; }
+        public int CountInStock{get; set;}
 
         // Product Category Relation
         public ICollection<Category> Categories { get; set; }

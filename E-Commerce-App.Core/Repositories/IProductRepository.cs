@@ -44,5 +44,6 @@ namespace E_Commerce_App.Core.Repositories
         int GetCountByCategory(string category);
 
         public void RemoveProduct(Product product);
+        Task<Product> GetProductByIdAsync(string id);
     }
 }

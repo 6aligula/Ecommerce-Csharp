@@ -44,5 +44,9 @@ namespace E_Commerce_App.Core.Services
         int GetCountByCategory(string category);
 
         public void RemoveProduct(Product product);
+        
+        // Nuevo método específico para Product que utiliza string como ID
+        Task<Product> GetProductByIdAsync(string id);
+
     }
 }
