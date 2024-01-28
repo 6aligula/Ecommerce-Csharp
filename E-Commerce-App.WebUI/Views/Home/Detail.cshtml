@@ -61,6 +61,9 @@
                             </div>
                         </div>
                         <p>@Model.ProductDto.ShortDescription</p>
+
+                    @if(Model.ProductDto.CountInStock > 0)
+                    {    
                         @if (Model.ProductDto.IsActive)
                         {
                             <div class="row">
@@ -85,15 +88,16 @@
                                 </div>
                             </div>
                             <br />
-                            @if (User.Identity.IsAuthenticated)
-                            {
+                           // @if (User.Identity.IsAuthenticated)
+                            //{
                                 <div class="product-count">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <small>Cantidad</small>
+                                            <small>Disponibles: @Model.ProductDto.CountInStock unidades</small>
                                             <div class="display-flex">
                                                 <div class="qtyminus">-</div>
-                                                <input type="text" name="quantity" value="1" class="qty">
+                                                
+                                                <input type="text" name="quantity" value="1" class="qty" min="1" max="@Model.ProductDto.CountInStock">
                                                 <div class="qtyplus">+</div>
                                             </div>
                                         </div>
@@ -104,12 +108,19 @@
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            //}
                         }
                         else
                         {
                             <small class="text-danger">El producto ha sido eliminado de la lista.</small>
                         }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            Este producto está actualmente sin stock y no se puede añadir al carrito.
+                        </div>
+                    }
                     </div>
                 </div>
             </div>
@@ -162,6 +173,10 @@
 </form>
 
 @section Scripts{
+    <script type="text/javascript">
+        // Asigna el valor de CountInStock a una variable JavaScript
+        var maxQuantity = @Model.ProductDto.CountInStock;
+    </script>
     <!-- Product Detail Custom JS -->
     <script src="~/customPagesJs/productDetail.js"></script>
     <!-- Light Slider JS -->

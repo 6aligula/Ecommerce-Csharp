@@ -16,11 +16,13 @@ namespace E_Commerce_App.WebUI.Controllers
     {
         private ICartService _cartService;
         private UserManager<User> _userManager;
+        private readonly IProductService _productService;
 
-        public CartController(ICartService cartService, UserManager<User> userManager)
+        public CartController(ICartService cartService, UserManager<User> userManager, IProductService productService)
         {
             _cartService = cartService;
             _userManager = userManager;
+            _productService = productService;
         }
         [HttpGet]
         [Route("/cart")]
@@ -46,10 +48,25 @@ namespace E_Commerce_App.WebUI.Controllers
                 return Json(new { success = false, redirectUrl = "/Account/Login" });
             }
 
+            // Obtener detalles del producto para verificar la cantidad en stock
+            var product = await _productService.GetProductByIdAsync(productId);
+
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Producto no encontrado." });
+            }
+
+            if (product.CountInStock < quantity)
+            {
+                // Producto no disponible en la cantidad solicitada
+                return Json(new { success = false, message = "No hay suficiente stock disponible." });
+            }
+
             await _cartService.AddToCart(userId, productId, quantity, price, color);
 
             return Json(new { success = true, message = "El producto ha sido añadido al carrito." });
         }
+
 
         [HttpPost]
         [Route("/RemoveFromCart/{productId}")]

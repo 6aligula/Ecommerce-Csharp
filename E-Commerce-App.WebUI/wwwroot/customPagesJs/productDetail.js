@@ -1,25 +1,36 @@
 ﻿$(document).ready(function () {
+    
 
+    $(".qtyminus").on("click", function () {
+        var now = parseInt($(".qty").val(), 10);
+        //console.log("Minus clicked, current value is: ", now);
+        if (now > 1) {
+            now--;
+            $(".qty").val(now);
+            //console.log("New value is: ", now);
+        }
+    });
+
+    $(".qtyplus").on("click", function () {
+        var now = parseInt($(".qty").val(), 10);
+        //console.log("Plus clicked, current value is: ", now);
+        //console.log("Max quantity is: ", maxQuantity);
+        if (now < maxQuantity) {
+            now++;
+            $(".qty").val(now);
+        } else {
+            Swal.fire(
+                'Has excedido la cantidad maxima de stock !',
+            )
+        }
+    });
+    
     $('#imageGallery').lightSlider({
         gallery: true,
         item: 1,
         loop: true,
         slideMargin: 0,
         thumbItem: 9
-    });
-
-    $(".qtyminus").on("click", function () {
-        var now = $(".qty").val();
-        if ($.isNumeric(now)) {
-            if (parseInt(now) - 1 > 0) { now--; }
-            $(".qty").val(now);
-        }
-    })
-    $(".qtyplus").on("click", function () {
-        var now = $(".qty").val();
-        if ($.isNumeric(now)) {
-            $(".qty").val(parseInt(now) + 1);
-        }
     });
 
     // Submit form
@@ -58,6 +69,23 @@
         event.preventDefault();
         //return false;
     });
+
+    // $(".qtyminus").on("click", function () {
+    //     var now = parseInt($(".qty").val());
+    //     if (now > 1) {
+    //         $(".qty").val(now - 1);
+    //     }
+    // });
+
+    // $(".qtyplus").on("click", function () {
+    //     var now = parseInt($(".qty").val());
+    //     if (now < maxQuantity) {
+    //         $(".qty").val(now + 1);
+    //     } else {
+    //         // Opcional: Alertar al usuario que alcanzó la cantidad máxima
+    //         alert("Has alcanzado la cantidad máxima en stock.");
+    //     }
+    // });
 
 });
 function getChecked() {
