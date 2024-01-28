@@ -64,7 +64,7 @@
                         : "Error en la orden";
 
                     var date = Model.OrderDto.OrderDate;
-                    string orderDate = date.ToString("dd MMMM yyyy HH:mm", CultureInfo.CreateSpecificCulture("tr"));
+                    string orderDate = date.ToString("dd MMMM yyyy HH:mm", CultureInfo.CreateSpecificCulture("es-ES"));
                 }
                 <h3 class="mt-2"><b>@orderDate</b> | Número de orden : <b>@Model.OrderDto.ConversationId.Split("_")[0]</b></h3>
                 <hr />
@@ -93,7 +93,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="submit" class="btn btn-outline-primary btn-block" value="Kaydet" />
+                                <input type="submit" class="btn btn-outline-primary btn-block" value="Guardar" />
                             </div>
                         </div>
                     </form>

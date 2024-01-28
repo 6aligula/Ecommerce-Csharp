@@ -100,7 +100,7 @@ namespace E_Commerce_App.WebUI.Controllers
         public async Task<IActionResult> AddOrEdit([FromForm] ProductDto productDto, IFormFile mainImage, List<IFormFile> allImages, int[] categoryIds, int[] colorIds)
         {
 
-            // TODO url tekrarlama durumunu kontrol et ona göre hata gönder
+            // TODO Verificar el estado de repetición de la URL y envíe el error correspondiente
             try
             {
                 if (ModelState.IsValid)
@@ -115,13 +115,13 @@ namespace E_Commerce_App.WebUI.Controllers
                         var editedProduct = await _crudHelper.ProductForEdit(productDto, mainImage, allImages, categoryIds, colorIds);
                         _productService.Update(_mapper.Map<ProductDto, Product>(editedProduct));
                     }
-                    return Json(new { isValid = true, message = Messages.JSON_CREATE_MESSAGE("Ürün") });
+                    return Json(new { isValid = true, message = Messages.JSON_CREATE_MESSAGE("Producto") });
                 }
-                return Json(new { isValid = false, message = "Lütfen tüm alanları doldurunuz." });
+                return Json(new { isValid = false, message = "Por favor rellena todos los campos." });
             }
             catch (Exception)
             {
-                return Json(new { isValid = false, message = Messages.JSON_CREATE_MESSAGE("Ürün", false) });
+                return Json(new { isValid = false, message = Messages.JSON_CREATE_MESSAGE("Producto", false) });
             }
         }
 
@@ -132,12 +132,12 @@ namespace E_Commerce_App.WebUI.Controllers
             {
                 var product = await _productService.SingleOrDefaultAsync(p => p.Id == id);
 
-                // ürün silineceği için sepetlerde bulunan bu ürünü kaldırıyoruz.
+                // Dado que el producto se eliminará, lo eliminaremos de los carritos..
                 var cartItems = await _cartItemService.Where(p => p.ProductId == product.Id);
                 _cartItemService.RemoveRange(cartItems);
 
                 product.IsActive = false;
-                _productService.RemoveProduct(product); // carttan sil ürünleri bu islemden sonra
+                _productService.RemoveProduct(product); // Eliminar los productos del carrito después de este proceso
                 
 
                 //_productService.Remove(product);
@@ -145,7 +145,7 @@ namespace E_Commerce_App.WebUI.Controllers
                 //var productCategories = await _productCategoryService.Where(p => p.ProductId == product.Id);
                 //_productColorService.RemoveRange(productColors);
                 //_productCategoryService.RemoveRange(productCategories);
-                return Json(new { isValid = true, message = Messages.JSON_REMOVE_MESSAGE("Ürün"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllProducts", await GetProducts()) });
+                return Json(new { isValid = true, message = Messages.JSON_REMOVE_MESSAGE("Producto"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllProducts", await GetProducts()) });
             }
             catch (Exception ex)
             {

@@ -5,9 +5,9 @@ namespace E_Commerce_App.Core.Shared.DTOs
 {
     public class BaseDto
     {
-        [Display(Name ="Oluşturma Tarihi")]
+        [Display(Name ="Fecha de creación")]
         public DateTime? CreationDate { get; set; }
-        [Display(Name = "Güncelleme Tarihi")]
+        [Display(Name = "fecha de actualización")]
         public DateTime? DateOfUpdate { get; set; }
         public bool IsActive { get; set; }
     }

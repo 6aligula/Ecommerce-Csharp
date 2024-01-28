@@ -10,8 +10,8 @@ removeCategory = form => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sil !',
-        cancelButtonText: 'İptal !'
+        confirmButtonText: 'Si!',
+        cancelButtonText: 'NO !'
     }).then((data) => {
         console.log(data);
         try {

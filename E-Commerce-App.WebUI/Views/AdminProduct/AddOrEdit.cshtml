@@ -2,14 +2,14 @@
 @if (!string.IsNullOrEmpty(ViewData["ProductId"].ToString()))
 {
     ViewData["SubPage"] = "Productos";
-    ViewData["SubPageUrl"] = "Producto";
+    ViewData["SubPageUrl"] = "Product";
     ViewData["CurrentPage"] = "Editar / " + ViewData["ProductId"];
     ViewData["CurrentPageUrl"] = "Product/Edit/" + ViewData["ProductId"];
 }
 else
 {
     ViewData["SubPage"] = "Productos";
-    ViewData["SubPageUrl"] = "Producto";
+    ViewData["SubPageUrl"] = "Product";
     ViewData["CurrentPage"] = "Agregar producto";
     ViewData["CurrentPageUrl"] = "Product/Add/";
 }
@@ -50,7 +50,7 @@ else
                 </div>
                 <br />
                 <div class="form-group">
-                    <textarea asp-for="ProductDto.ShortDescription" id="productShortDescription" maxlength="240" class="form-control" placeholder="Ingrese su declaración preliminar aquí."></textarea>
+                    <textarea asp-for="ProductDto.ShortDescription" id="productShortDescription" maxlength="240" class="form-control" placeholder="Ingrese su comentario preliminar aquí."></textarea>
                 </div>
                 <br />
                 <div class="form-group">
@@ -96,7 +96,7 @@ else
                     <label class="form-check-label" asp-for="ProductDto.IsHome">¿Debería ponerse a la venta?</label>
                 </div>
                 <br />
-                <button type="submit" id="btnSubmit" class="btn btn-primary btn-block">Ahorrar</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary btn-block">Guardar</button>
             </div>
         </div>
         <div class="col-md-4">

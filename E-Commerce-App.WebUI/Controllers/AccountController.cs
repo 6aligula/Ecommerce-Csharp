@@ -72,7 +72,7 @@ namespace E_Commerce_App.WebUI.Controllers
                     await _userManager.AddPasswordAsync(user, model.NewPassword);
                 }
                 await _userManager.UpdateAsync(user);
-                return Json(new { success = true, message = "Profil bilgileri başarıyla güncellendi." });
+                return Json(new { success = true, message = "La información del perfil se ha actualizado correctamente." });
             }
             return Redirect(nameof(Profile));
         }
@@ -98,8 +98,8 @@ namespace E_Commerce_App.WebUI.Controllers
         private async Task SendVerificationEmail(User user, string email, string baseUrl)
         {
             //var siteUrl = "https://localhost:5001";
-            //var html = $"lütfen email hesabınızı onaylamak için <a href='{siteUrl + baseUrl}'>linke</a> tıklayınız.";
-            ////await _emailSender.SendEmailAsync(model.Email, "hesabınızı onaylayınız.", html);
+            //var html = $"Por favor confirme su cuenta de correo electrónico <a href='{siteUrl + baseUrl}'>linke</a> haga clic aquí.";
+            ////await _emailSender.SendEmailAsync(model.Email, "Confirme su cuenta.", html);
 
             // generate token
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -111,10 +111,10 @@ namespace E_Commerce_App.WebUI.Controllers
             Console.Write(url);
             // email
             var siteUrl = "https://localhost:44373";
-            var html2 = $"lütfen email hesabınızı onaylamak için <a href='{siteUrl + url}'>linke</a> tıklayınız.";
+            var html2 = $"Por favor confirme su cuenta de correo electrónico <a href='{siteUrl + url}'>linke</a> haga clic aquí.";
             var emailUrl = siteUrl + url;
             var html = Messages.EMAIL_CONFIRM_HTML(user.FullName, emailUrl);
-            await _emailSender.SendEmailAsync(user.Email, "Kullanıcı Hesap Doğrulama", html);
+            await _emailSender.SendEmailAsync(user.Email, "Verificación de cuenta de usuario", html);
 
         }
         [HttpPost]
@@ -125,10 +125,10 @@ namespace E_Commerce_App.WebUI.Controllers
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
 
-                if (user == null) return Json(new { message = "Email adresi veya parola hatalı.", errorType = 1 });
+                if (user == null) return Json(new { message = "La dirección de correo electrónico o la contraseña son incorrectas.", errorType = 1 });
 
                 if (!await _userManager.IsEmailConfirmedAsync(user))
-                    return Json(new { message = "Email adresinizi onaylamak için lütfen maillerinizi kontrol ediniz.", errorType = 2 });
+                    return Json(new { message = "Por favor revise sus correos electrónicos para confirmar su dirección de correo electrónico.", errorType = 2 });
 
                 var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
 
@@ -138,7 +138,7 @@ namespace E_Commerce_App.WebUI.Controllers
                     return Json(new { success = true, redirectUrl = "/" });// Redirect(model.ReturnUrl ?? "~/");
                 }
 
-                else return Json(new { message = "Email adresi veya parola hatalı.", errorType = 1 });
+                else return Json(new { message = "La dirección de correo electrónico o la contraseña son incorrectas.", errorType = 1 });
             }
             return View(model);
         }
@@ -156,14 +156,14 @@ namespace E_Commerce_App.WebUI.Controllers
                 var result = await _userManager.ConfirmEmailAsync(user, token);
                 if (result.Succeeded)
                 {
-                    // cart objesini oluşturalım
+                    // Creemos el objeto del carrito.
                     await _cartService.InitializeCart(user.Id);
-                    //CreateMessage("hesabınız onaylandı", "hesabınız onaylandı.", "success");
-                    //return Json(new { success=true, redirectUrl="/account/login", message="Kullanıcı kaydınız tamamlandı. Giriş yapabilirsiniz." });
+                    //CreateMessage("Tu cuenta ha sido confirmada", "Tu cuenta ha sido confirmada", "success");
+                    //return Json(new { success=true, redirectUrl="/account/login", message="Su registro de usuario está completo. Puedes iniciar sesión." });
                     return RedirectToAction(nameof(Login));
                 }
             }
-            return Json(new { message = "Böyle bir kullanıcı bulunamadı." });
+            return Json(new { message = "No se encontró ningún usuario de este tipo." });
         }
 
         [HttpPost]
@@ -173,7 +173,7 @@ namespace E_Commerce_App.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 // email exist control
-                if (await EmailExist(model.Email)) return Json(new { message = "E-mail adresi ile zaten kayıt yapılmış.", errorType = 3 });
+                if (await EmailExist(model.Email)) return Json(new { message = "El registro ya se ha realizado con su dirección de correo electrónico.", errorType = 3 });
 
                 var user = new User { FullName = model.FullName, Email = model.Email, UserName = model.Email };
                 var resultUser = await _userManager.CreateAsync(user, model.Password);
@@ -191,17 +191,17 @@ namespace E_Commerce_App.WebUI.Controllers
 
                         // email operations
                         await SendVerificationEmail(user, user.Email, baseUrl);
-                        return Json(new { success = true, redirectUrl = "/account/login", message = "Kullanıcı kaydı başarılı. Lütfen mail adresinizi doğrulayın." });
+                        return Json(new { success = true, redirectUrl = "/account/login", message = "Registro de usuario exitoso. Por favor verifique su dirección de correo electrónico." });
                     }
                     catch (Exception)
                     {
                         await _userManager.DeleteAsync(user);
-                        return Json(new { success = false, redirectUrl = "/account/register", message = "Kullanıcı kaydında hata yaşandı. Lütfen daha sonra tekrar deneyiniz." });
+                        return Json(new { success = false, redirectUrl = "/account/register", message = "Hubo un error en el registro de usuario. Por favor, inténtelo de nuevo más tarde." });
                     }
                 }
                 else if (!resultUser.Succeeded)
                 {
-                    return Json(new { message = "Parola en az, 6 karakter, 1 büyük harf, 1 sayısal ifade ve 1 noktalama işareti içermelidir.", success = false });
+                    return Json(new { message = "La contraseña debe contener al menos 6 caracteres, 1 letra mayúscula, 1 expresión numérica y 1 signo de puntuación.", success = false });
                 }
             }
             return View(model);
@@ -221,8 +221,8 @@ namespace E_Commerce_App.WebUI.Controllers
 
             // email 
             var siteUrl = "https://localhost:5001";
-            var html = $"lütfen hesap şifrenizi değiştirmek için <a href='{siteUrl + url}'>linke</a> tıklayınız.";
-            //await _emailSender.SendEmailAsync(Email, "Şifre Değiştirme.", html);
+            var html = $"Por favor cambie la contraseña de su cuenta. <a href='{siteUrl + url}'>linke</a> Haga clic aquí.";
+            //await _emailSender.SendEmailAsync(Email, "Cambiar la contraseña.", html);
 
             return View();
         }

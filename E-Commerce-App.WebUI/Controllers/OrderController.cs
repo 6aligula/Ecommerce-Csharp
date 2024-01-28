@@ -53,7 +53,7 @@ namespace E_Commerce_App.WebUI.Controllers
             var ratings = new List<RatingDto>(); //
             var toComment = new List<string>();// yes, no olsun
 
-            // orderitemları sırala bir önceki ile aynı ise ekleme değilse ekle
+            // Ordenar los artículos del pedido, si es igual al anterior agregar, si no, agregar
             //orderItems = orderItems.OrderBy(p => p.ProductId).ToList();
 
             for (int i = 0; i < orderItems.Count; i++)

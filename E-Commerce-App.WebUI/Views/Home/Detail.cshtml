@@ -90,7 +90,7 @@
                                 <div class="product-count">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <small>Pedazo</small>
+                                            <small>Cantidad</small>
                                             <div class="display-flex">
                                                 <div class="qtyminus">-</div>
                                                 <input type="text" name="quantity" value="1" class="qty">
@@ -139,7 +139,7 @@
                                     foreach (var item in Model.Ratings)
                                     {
                                         var date = (DateTime)item.CreationDate;
-                                        <small>@date.ToString("dd MMMM yyyy", CultureInfo.CreateSpecificCulture("tr"))</small>
+                                        <small>@date.ToString("dd MMMM yyyy", CultureInfo.CreateSpecificCulture("es-ES"))</small>
                                         <div class="star-area" data-point="@item.Point">
                                             <span class="fa fa-star @(item.Point>0 ?"checked":"")"></span>
                                             <span class="fa fa-star @(item.Point>1 ?"checked":"")"></span>

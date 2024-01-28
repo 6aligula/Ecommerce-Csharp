@@ -42,7 +42,7 @@ namespace E_Commerce_App.WebUI.Controllers
                 if ((model.Email.Equals(user.Email) && model.FullName.Equals(user.FullName))
                     && string.IsNullOrEmpty(model.NewPassword))
                 {
-                    return Json(new { success = true, message = "Değişiklik yapmadınız.", redirectUrl = "/Admin/Profile" });
+                    return Json(new { success = true, message = "No has realizado ningún cambio.", redirectUrl = "/Admin/Profile" });
                 }
 
                 user.Email = model.Email;
@@ -53,9 +53,9 @@ namespace E_Commerce_App.WebUI.Controllers
                     await _userManager.AddPasswordAsync(user, model.NewPassword);
                 }
                 await _userManager.UpdateAsync(user);
-                return Json(new { success = true, message = "Profil başarıyla güncellendi.", redirectUrl="/Admin/Profile" });
+                return Json(new { success = true, message = "El perfil se ha actualizado correctamente.", redirectUrl="/Admin/Profile" });
             }
-            return Json(new { success=false, message="Profil güncellemesinde hata yaşandı, tekrar deneyiniz.", redirectUrl = "/Admin/Profile" });
+            return Json(new { success=false, message="Se produjo un error al actualizar tu perfil, inténtalo nuevamente.", redirectUrl = "/Admin/Profile" });
         }
     }
 }

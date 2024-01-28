@@ -58,9 +58,9 @@ namespace E_Commerce_App.WebUI.Controllers
                     categoryDto.DateOfUpdate = DateTime.Now;
                     _categoryService.Update(_mapper.Map<Category>(categoryDto));
                 }
-                return Json(new { isValid = true, message = Messages.JSON_CREATE_MESSAGE("Kategori"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCategories", await GetCategories()) });
+                return Json(new { isValid = true, message = Messages.JSON_CREATE_MESSAGE("Categoría"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCategories", await GetCategories()) });
             }
-            return Json(new { isValid = false, message = Messages.JSON_CREATE_MESSAGE("Kategori", false), html = Helpers.UIHelper.RenderRazorViewToString(this, "AddOrEdit", categoryDto) });
+            return Json(new { isValid = false, message = Messages.JSON_CREATE_MESSAGE("Categoría", false), html = Helpers.UIHelper.RenderRazorViewToString(this, "AddOrEdit", categoryDto) });
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -75,7 +75,7 @@ namespace E_Commerce_App.WebUI.Controllers
 
                 var productCategories = await _productCategoryService.Where(p => p.CategoryId == category.Id);
                 _productCategoryService.RemoveRange(productCategories);
-                return Json(new { isValid = true, message = Messages.JSON_REMOVE_MESSAGE("Kategori"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCategories", await GetCategories()) });
+                return Json(new { isValid = true, message = Messages.JSON_REMOVE_MESSAGE("Categoría"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCategories", await GetCategories()) });
             }
             catch (Exception ex)
             {

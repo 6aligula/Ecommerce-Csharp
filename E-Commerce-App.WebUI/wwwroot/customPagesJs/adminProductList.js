@@ -13,8 +13,8 @@ function removeProduct(id) {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sil !',
-        cancelButtonText: 'İptal !'
+        confirmButtonText: 'SI !',
+        cancelButtonText: 'NO !'
     }).then((data) => {
         console.log(data);
         try {

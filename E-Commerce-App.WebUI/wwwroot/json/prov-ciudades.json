@@ -1,0 +1,18 @@
+[
+    {
+        "provincia": "Barcelona",
+        "ciudades": ["Barcelona", "Badalona", "Terrassa", "Sabadell"]
+    },
+    {
+        "provincia": "Madrid",
+        "ciudades": ["Madrid", "Alcalá de Henares", "Fuenlabrada", "Leganés"]
+    },
+    {
+        "provincia": "Islas Canarias",
+        "ciudades": ["Las Palmas de Gran Canaria", "Santa Cruz de Tenerife", "San Cristóbal de La Laguna", "Arona"]
+    },
+    {
+        "provincia": "Vizcaya",
+        "ciudades": ["Bilbao", "Barakaldo", "Getxo", "Portugalete"]
+    }
+]

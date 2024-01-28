@@ -16,9 +16,9 @@
         <form asp-controller="Account" asp-action="Register" id="register-form">
             <div class="con">
                 <header class="head-form">
-                    <h2>E-Pazar</h2>
+                    <h2>Mercado electrónico</h2>
                     <p>
-                        Kayıt olmak için formu doldurun.
+                        Complete el formulario para registrarse.
                     </p>
                 </header>
                 <br>
@@ -26,25 +26,25 @@
                     <span class="input-item">
                         <i class="fa fa-user"></i>
                     </span>
-                    <input type="text" class="form-input" asp-for="@Model.FullName" id="txt-input" placeholder="Ad soyad" required>
+                    <input type="text" class="form-input" asp-for="@Model.FullName" id="txt-input" placeholder="Nombre y Apellido" required>
                     <br />
                     <span class="input-item">
                         <i class="fa fa-envelope"></i>
                     </span>
-                    <input type="email" class="form-input" asp-for="@Model.Email" id="txt-input" placeholder="Email adres" required>
+                    <input type="email" class="form-input" asp-for="@Model.Email" id="txt-input" placeholder="Dirección de correo electrónico" required>
                     <br>
                     <span class="input-item">
                         <i class="fa fa-key"></i>
                     </span>
-                    <input type="password" class="form-input" asp-for="@Model.Password" placeholder="Parola" id="pwd" required autocomplete="new-password">
+                    <input type="password" class="form-input" asp-for="@Model.Password" placeholder="Contraseña" id="pwd" required autocomplete="new-password">
                     <span>
                         <i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i>
                     </span>
                     <br>
-                    <button class="log-in"> Kayıt Ol </button>
+                    <button class="log-in"> Registro </button>
                 </div>
                 <header class="head-form">
-                    <p>Zaten üye misiniz ? <a href="/Account/Login">Giris yap</a></p>
+                    <p>¿Ya eres usuario? <a href="/Account/Login">Acceso</a></p>
                 </header>
             </div>
         </form>

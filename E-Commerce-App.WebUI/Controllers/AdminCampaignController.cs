@@ -13,9 +13,9 @@ using static E_Commerce_App.WebUI.Helpers.UIHelper;
 
 namespace E_Commerce_App.WebUI.Controllers
 {
-    // ADMİN PRODUCT SUBMİTİ VALİDATİON DOĞRU İSE ÇALIŞTIR.
+    // EJECUTE EL ENVÍO DEL PRODUCTO ADMIN SI LA VALIDACIÓN ES CORRECTA.
 
-    // TODO kategori silerken ürün_kategoriden kategorinin oldugu tüm satırları silmeyi unutma
+    // Al eliminar una categoría TODO, no olvides eliminar todas las filas que contienen la categoría de product_category
     [Authorize(Roles = "admin")]
     public class AdminCampaignController : Controller
     {
@@ -60,9 +60,9 @@ namespace E_Commerce_App.WebUI.Controllers
                     campaignDto.DateOfUpdate = DateTime.Now;
                     _campaignService.Update(_mapper.Map<Campaign>(campaignDto));
                 }
-                return Json(new { isValid = true, message = Messages.JSON_CREATE_MESSAGE("Kampanya"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCampaigns", await GetCampaigns()) });
+                return Json(new { isValid = true, message = Messages.JSON_CREATE_MESSAGE("Oferta"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCampaigns", await GetCampaigns()) });
             }
-            return Json(new { isValid = false, message = Messages.JSON_CREATE_MESSAGE("Kampanya", false), html = Helpers.UIHelper.RenderRazorViewToString(this, "AddOrEdit", campaignDto) });
+            return Json(new { isValid = false, message = Messages.JSON_CREATE_MESSAGE("Oferta", false), html = Helpers.UIHelper.RenderRazorViewToString(this, "AddOrEdit", campaignDto) });
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -73,7 +73,7 @@ namespace E_Commerce_App.WebUI.Controllers
                 var campaign = await _campaignService.GetByIdAsync(id);
                 if (campaign != null)
                     _campaignService.Remove(campaign);
-                return Json(new { isValid = true, message = Messages.JSON_REMOVE_MESSAGE("Kampanya"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCampaigns", await GetCampaigns()) });
+                return Json(new { isValid = true, message = Messages.JSON_REMOVE_MESSAGE("Oferta"), html = Helpers.UIHelper.RenderRazorViewToString(this, "_AllCampaigns", await GetCampaigns()) });
             }
             catch (Exception ex)
             {

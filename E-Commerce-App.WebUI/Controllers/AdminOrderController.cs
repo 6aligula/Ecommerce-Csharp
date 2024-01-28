@@ -46,13 +46,13 @@ namespace E_Commerce_App.WebUI.Controllers
         {
             try
             {
-                if(model.OrderDto.OrderState<0) return Json(new { success = false, message = "Lütfen bir sipariş durumu seçiniz." });
+                if(model.OrderDto.OrderState<0) return Json(new { success = false, message = "Por favor seleccione un estado de pedido" });
                 await _orderService.EditOrderState(model.OrderDto.Id, model.OrderDto.OrderState);
-                return Json(new { success = true, message = "Sipariş durumu güncellendi.", redirectUrl = "/Admin/Order/"+model.OrderDto.Id});
+                return Json(new { success = true, message = "Estado del pedido actualizado.", redirectUrl = "/Admin/Order/"+model.OrderDto.Id});
             }
             catch (System.Exception)
             {
-                return Json(new { success = false, message = "Sipariş durumu güncellenirken hata meydana geldi." });
+                return Json(new { success = false, message = "Se produjo un error al actualizar el estado del pedido." });
             }
         }
 

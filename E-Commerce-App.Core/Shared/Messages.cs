@@ -6,20 +6,20 @@ namespace E_Commerce_App.Core.Shared
 {
     public static class Messages
     {
-        public const string REQUIRED_INPUT = "Bu alan boş bırakılamaz.";
+        public const string REQUIRED_INPUT = "Este campo no puede dejarse en blanco.";
         public static string RANGE_INPUT(string min, string max)
-            => $"Bu alan {min} ile {max} arasında değer alabilir.";
+            => $"Este campo puede tomar valores entre {min} y {max}";
 
 
         public static string JSON_CREATE_MESSAGE(string type, bool state = true)
         {
-            if (state == true) return $"{type} başarıyla oluşturuldu.";
-            else return $"{type} oluşturulurken hata gerçekleşti.";
+            if (state == true) return $"{type} creado exitosamente.";
+            else return $"{type} se produjo un error al crear.";
         }
         public static string JSON_REMOVE_MESSAGE(string type, bool state = true)
         {
-            if (state == true) return $"{type} başarıyla silindi.";
-            else return $"{type} silinirken hata gerçekleşti.";
+            if (state == true) return $"{type} eliminado con éxito.";
+            else return $"{type} Se produjo un error al eliminar";
         }
 
         public static string EMAIL_CONFIRM_MESSAGE()
@@ -35,8 +35,8 @@ namespace E_Commerce_App.Core.Shared
 
             string emailHtml = System.IO.File.ReadAllText(file);
 
-            emailHtml = emailHtml.Replace("#Kullanıcı#", user);
-            emailHtml = emailHtml.Replace("#Baglanti#", url);
+            emailHtml = emailHtml.Replace("#Usuario#", user);
+            emailHtml = emailHtml.Replace("#Enlace#", url);
 
             return emailHtml;
         }

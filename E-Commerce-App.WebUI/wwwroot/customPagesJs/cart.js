@@ -10,8 +10,8 @@ function cartItemComponent(data, index) {
         <div class="col-md-2"><img src="/img/${data[index].imageUrl}" width="100" height="100" /></div>
         <div class="col-md-9">
             <p>${data[index].name}</p>
-            <p>${data[index].cartItemDto.quantity} Adet ${data[index].cartItemDto.color != null ? data[index].cartItemDto.color : ""} </p>
-            <h5> ${data[index].cartItemDto.price * data[index].cartItemDto.quantity} TL</h5>
+            <p>${data[index].cartItemDto.quantity} Unidades ${data[index].cartItemDto.color != null ? data[index].cartItemDto.color : ""} </p>
+            <h5> ${data[index].cartItemDto.price * data[index].cartItemDto.quantity} €</h5>
         </div>
         <div class="col-md-1">
             <button class="btn btn-danger" onclick="removeCartItem('${data[index].cartItemDto.productId}')"><i class="fas fa-trash"></i></button>

@@ -12,7 +12,7 @@
         },
         placeholders: {
             number: '•••• •••• •••• ••••',
-            name: 'AD SOYAD',
+            name: 'Adolfo',
             expiry: '••/••',
             cvc: '•••'
         }
@@ -25,31 +25,29 @@
         $("#expiry-year").val(arr[1].trim());
     });
 
-    // Get cities from json file
-    $.getJSON("/json/tr-iller-bolgeler.json", function (sonuc) {
-        $.each(sonuc, function (index, value) {
-            var row = "";
-            var il = value.il.toUpperCase();
-            row += '<option value="' + value.il + '">' + il + '</option>';
-            $("#il").append(row);
-        })
+    // Cargar provincias desde el archivo JSON
+    $.getJSON("/json/prov-ciudades.json", function (result) {
+        $.each(result, function (index, value) {
+            var row = '<option value="' + value.provincia + '">' + value.provincia.toUpperCase() + '</option>';
+            $("#provincia").append(row);
+        });
     });
-    // get districts from json file after city changed
-    $("#il").on("change", function () {
-        var il = $(this).val();
-        $("#ilce").attr("disabled", false).html("<option value=''>Elegir...</option>");
-        $.getJSON("/json/tr-iller-ilceler.json", function (sonuc) {
-            $.each(sonuc, function (index, value) {
-                var row = "";
-                if (value.il == il) {
-                    var ilce = value.ilce.toUpperCase();
-                    row += '<option value="' + value.ilce + '">' + ilce + '</option>';
-                    $("#ilce").append(row);
+
+    // Cargar ciudades después de que se selecciona una provincia
+    $("#provincia").on("change", function () {
+        var provinciaSeleccionada = $(this).val();
+        $("#ciudad").attr("disabled", false).html("<option value=''>Elegir...</option>");
+        $.getJSON("/json/prov-ciudades.json", function (result) {
+            $.each(result, function (index, value) {
+                if (value.provincia == provinciaSeleccionada) {
+                    $.each(value.ciudades, function (ciudadIndex, ciudad) {
+                        var row = '<option value="' + ciudad + '">' + ciudad.toUpperCase() + '</option>';
+                        $("#ciudad").append(row);
+                    });
                 }
             });
         });
     });
-
 
     // Validate Payment Form
     const REQUIRED_INPUT_MESSAGE = "Este campo es obligatorio completarlo.";

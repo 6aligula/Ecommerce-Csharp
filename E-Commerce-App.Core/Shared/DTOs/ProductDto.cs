@@ -7,38 +7,38 @@ namespace E_Commerce_App.Core.Shared.DTOs
     public class ProductDto : BaseDto
     {
         public string Id { get; set; }
-        [Display(Name = "Ad")]
+        [Display(Name = "Nombre")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
-        [MinLength(2, ErrorMessage = "Ürün adı en az 2 harften oluşabilir.")]
-        [MaxLength(50, ErrorMessage = "Ürün adı en fazla 50 harften oluşabilir.")]
+        [MinLength(2, ErrorMessage = "El nombre del producto puede constar de al menos 2 letras.")]
+        [MaxLength(50, ErrorMessage = "El nombre del producto puede constar de un máximo de 50 letras.")]
         public string Name { get; set; }
 
-        [Display(Name = "Bağlantı")]
-        [MinLength(2, ErrorMessage = "Ürün bağlantısı en az 2 harften oluşabilir.")]
-        [MaxLength(80, ErrorMessage = "Ürün bağlantısı en fazla 80 harften oluşabilir.")]
+        [Display(Name = "Conexión")]
+        [MinLength(2, ErrorMessage = "El enlace del producto puede constar de al menos 2 letras.")]
+        [MaxLength(80, ErrorMessage = "El enlace del producto puede constar de un máximo de 80 letras.")]
         public string Url { get; set; }
 
-        [Display(Name = "Fiyat")]
+        [Display(Name = "Precio")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
-        [Range(1, 1000000, ErrorMessage = "1 ile 1000000 arasında değer girmelisiniz.")]
+        [Range(1, 1000000, ErrorMessage = "Debe ingresar un valor entre 1 y 1000000.")]
         public double? Price { get; set; }
 
-        [Display(Name = "İndirim Oranı")]
-        [Range(1, 100, ErrorMessage = "1 ile 100 arasında değer girmelisiniz.")]
+        [Display(Name = "Tasa de descuento")]
+        [Range(1, 100, ErrorMessage = "Debe ingresar un valor entre 1 y 100.")]
         public double? Discount { get; set; }
 
-        [Display(Name = "Açıklama")]
+        [Display(Name = "Explicación")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
         public string ShortDescription { get; set; }
 
-        [Display(Name = "Detaylı Açıklama")]
+        [Display(Name = "Descripción detallada")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
         public string Description { get; set; }
 
-        [Display(Name = "Ürün Anasayfada Görünsün mü ?")]
+        [Display(Name = "¿El producto debería aparecer en la página de inicio?")]
         public bool IsHome { get; set; }
 
-        [Display(Name = "Kapak Resmi")]
+        [Display(Name = "Foto de cubierta")]
         public string MainImage { get; set; }
 
 

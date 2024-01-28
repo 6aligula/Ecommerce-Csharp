@@ -48,7 +48,7 @@ namespace E_Commerce_App.WebUI.Controllers
 
             await _cartService.AddToCart(userId, productId, quantity, price, color);
 
-            return Json(new { success = true, message = "Ürün sepete eklendi." });
+            return Json(new { success = true, message = "El producto ha sido añadido al carrito." });
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace E_Commerce_App.WebUI.Controllers
             return Json(new
             {
                 success = true,
-                message = Messages.JSON_REMOVE_MESSAGE("Ürün"),
+                message = Messages.JSON_REMOVE_MESSAGE("Producto"),
                 data = await CartHelper.GetProductsFromCart(_cartService, _userManager, User)
             });
         }

@@ -10,31 +10,31 @@ namespace E_Commerce_App.Core.Shared.DTOs
         public int Id { get; set; }
 
         public string OrderNumber { get; set; }
-        [Display(Name = "Sipariş Tarihi")]
+        [Display(Name = "Fecha de orden")]
         public DateTime OrderDate { get; set; }
         public string UserId { get; set; }
-        [Display(Name = "Alışveriş Tutarı")]
+        [Display(Name = "Monto de compras")]
         public double TotalPrice { get; set; }
-        [Display(Name = "Ad")]
+        [Display(Name = "Nombre")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
-        [MinLength(2, ErrorMessage = "Bu alan en az 2 harften oluşabilir.")]
-        [MaxLength(50, ErrorMessage = "Bu alan en fazla 50 harften oluşabilir.")]
+        [MinLength(2, ErrorMessage = "Este campo puede constar de al menos 2 letras.")]
+        [MaxLength(50, ErrorMessage = "Este campo puede contener hasta 50 letras.")]
         public string FirstName { get; set; }
-        [Display(Name = "Soyad")]
+        [Display(Name = "Apellido")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
-        [MinLength(2, ErrorMessage = "Bu alan en az 2 harften oluşabilir.")]
-        [MaxLength(50, ErrorMessage = "Bu alan en fazla 50 harften oluşabilir.")]
+        [MinLength(2, ErrorMessage = "Este campo puede constar de al menos 2 letras.")]
+        [MaxLength(50, ErrorMessage = "Este campo puede contener hasta 50 letras.")]
         public string LastName { get; set; }
-        [Display(Name = "Adres")]
+        [Display(Name = "DIRECCIÓN")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
-        [MinLength(10, ErrorMessage = "Bu alan en az 10 harften oluşabilir.")]
-        [MaxLength(120, ErrorMessage = "Bu alan en fazla 120 harften oluşabilir.")]
+        [MinLength(10, ErrorMessage = "Este campo puede constar de al menos 10 letras.")]
+        [MaxLength(120, ErrorMessage = "Este campo puede contener hasta 120 letras.")]
         public string Address { get; set; }
-        [Display(Name = "İl")]
+        [Display(Name = "Provincia")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
         public string City { get; set; }
         public string District { get; set; }
-        [Display(Name = "Telefon")]
+        [Display(Name = "Teléfono")]
         [Required(ErrorMessage = Messages.REQUIRED_INPUT)]
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -42,7 +42,7 @@ namespace E_Commerce_App.Core.Shared.DTOs
         public string PaymentId { get; set; }
         public string ConversationId { get; set; }
         public EnumPaymentType PaymentType { get; set; }
-        [Display(Name = "Sipariş Durumu")]
+        [Display(Name = "Estado del pedido")]
         public EnumOrderState OrderState { get; set; }
         public List<OrderItemDto> OrderItems { get; set; }
     }
