@@ -104,7 +104,7 @@ namespace E_Commerce_App.WebUI.Helpers
             return payment;
 
         }
-        public static async Task SaveOrder(IMapper _mapper, IService<Order> _orderService, OrderViewModel orderModel, Payment payment, string userId)
+        public static async Task<OrderDto> SaveOrder(IMapper _mapper, IService<Order> _orderService, OrderViewModel orderModel, Payment payment, string userId)
         {
             var order = new OrderDto();
 
@@ -141,8 +141,14 @@ namespace E_Commerce_App.WebUI.Helpers
                 orderTotalPrice += item.CartItemDto.Price * item.CartItemDto.Quantity;
             }
             order.TotalPrice = orderTotalPrice;
+            // Guardar la orden y obtener el objeto Order resultante de la base de datos
+            var orderEntity = _mapper.Map<OrderDto, Core.Entities.Order>(order);
+            var savedOrder = await _orderService.AddAsync(orderEntity);
 
-            await _orderService.AddAsync(_mapper.Map<OrderDto, Core.Entities.Order>(order));
+            // Devolver el DTO mapeado de la entidad guardada
+            return _mapper.Map<Core.Entities.Order, OrderDto>(savedOrder);
+            //await _orderService.AddAsync(_mapper.Map<OrderDto, Core.Entities.Order>(order));
+
         }
     }
 }

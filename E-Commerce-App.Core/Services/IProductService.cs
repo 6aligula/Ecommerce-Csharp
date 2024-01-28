@@ -47,6 +47,7 @@ namespace E_Commerce_App.Core.Services
         
         // Nuevo método específico para Product que utiliza string como ID
         Task<Product> GetProductByIdAsync(string id);
+        Task UpdateAsync(Product product);
 
     }
 }

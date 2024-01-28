@@ -63,5 +63,10 @@ namespace E_Commerce_App.Business.Services
             // Usa el repositorio para obtener el producto por su Id de tipo string
             return await _unitOfWork.ProductRepository.SingleOrDefaultAsync(p => p.Id == id);
         }
+        public async Task UpdateAsync(Product product)
+        {
+            _unitOfWork.ProductRepository.Update(product);
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

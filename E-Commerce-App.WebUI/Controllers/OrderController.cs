@@ -3,6 +3,7 @@ using E_Commerce_App.Core.Entities;
 using E_Commerce_App.Core.Services;
 using E_Commerce_App.Core.Shared;
 using E_Commerce_App.Core.Shared.DTOs;
+using E_Commerce_App.Core.Shared.Helper;
 using E_Commerce_App.WebUI.Helpers;
 using E_Commerce_App.WebUI.Identity;
 using E_Commerce_App.WebUI.ViewModels;
@@ -28,12 +29,13 @@ namespace E_Commerce_App.WebUI.Controllers
         private readonly IService<Rating> _ratingService;
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
+        private IEmailSender _emailSender; // Servicio para enviar emails
 
         public OrderController(
             IMapper mapper,
             UserManager<User> userManager,
             IOrderService orderService,
-            ICartService cartService, IProductService productService, IService<Rating> ratingService, IOrderItemService orderItemService)
+            ICartService cartService, IProductService productService, IService<Rating> ratingService, IOrderItemService orderItemService, IEmailSender emailSender)
         {
             _orderService = orderService;
             _mapper = mapper;
@@ -42,6 +44,8 @@ namespace E_Commerce_App.WebUI.Controllers
             _productService = productService;
             _ratingService = ratingService;
             _orderItemService = orderItemService;
+            _emailSender = emailSender;
+
         }
 
         [Route("/my-orders")]
@@ -50,8 +54,8 @@ namespace E_Commerce_App.WebUI.Controllers
             string userId = _userManager.GetUserId(User);
             var orderItems = await _orderService.GetByUserIdAsync(userId);
             var orderDates = new List<string>();
-            var ratings = new List<RatingDto>(); //
-            var toComment = new List<string>();// yes, no olsun
+            var ratings = new List<RatingDto>();
+            var toComment = new List<string>();
 
             // Ordenar los artículos del pedido, si es igual al anterior agregar, si no, agregar
             //orderItems = orderItems.OrderBy(p => p.ProductId).ToList();
@@ -143,6 +147,13 @@ namespace E_Commerce_App.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User);
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    // Asegúrarse que asigne al DTO o modelo adecuado
+                    orderModel.OrderDto.Email = user.Email;
+                }
+
                 var cart = await _cartService.GetCartByUserId(userId);
 
 
@@ -168,17 +179,41 @@ namespace E_Commerce_App.WebUI.Controllers
 
                 if (payment.Status == "success")
                 {
-                    await PaymentHelper.SaveOrder(_mapper, _orderService, orderModel, payment, userId);
+                    // Guardar la orden y obtener el DTO de la orden guardada
+                    var orderDto = await PaymentHelper.SaveOrder(_mapper, _orderService, orderModel, payment, userId);
+                    // Aquí es donde podrías actualizar el stock y enviar correos
+                    await UpdateStockAndSendEmails(orderDto);
+
                     await _cartService.ResetCart(cart.Id);
-                    return Json(new { success=true, message = "El pedido es exitoso." });
+                    return Json(new { success = true, message = "El pedido es exitoso." });
                 }
                 else
                 {
-                    return Json(new { success=false, message = payment.ErrorMessage });
+                    return Json(new { success = false, message = payment.ErrorMessage });
                 }
             }
             return View(orderModel);
         }
 
+        private async Task UpdateStockAndSendEmails(OrderDto orderDto)
+        {
+            // Ejemplo de actualización de stock
+            foreach (var item in orderDto.OrderItems)
+            {
+                var product = await _productService.GetProductByIdAsync(item.ProductId);
+                if (product != null && product.CountInStock >= item.Quantity)
+                {
+                    product.CountInStock -= item.Quantity;
+                    await _productService.UpdateAsync(product);
+                }
+            }
+
+            // Envío de correos
+            var buyerEmail = orderDto.Email; // Email del comprador
+            Console.WriteLine(buyerEmail);
+            var sellerEmail = "email_del_vendedor@example.com"; // Define cómo obtener este valor
+            await _emailSender.SendEmailAsync(buyerEmail, "Confirmación de pedido", "Su pedido ha sido exitoso.");
+            await _emailSender.SendEmailAsync(sellerEmail, "Nuevo pedido", "Has recibido un nuevo pedido.");
+        }
     }
 }
