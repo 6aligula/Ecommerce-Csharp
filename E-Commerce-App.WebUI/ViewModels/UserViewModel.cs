@@ -51,13 +51,22 @@ namespace E_Commerce_App.WebUI.ViewModels
         {
             [Required]
             public string Token { get; set; }
-            [Required]
+
+            [Required(ErrorMessage = "El correo electrónico es obligatorio.")]
+            [EmailAddress(ErrorMessage = "Debe ingresar un correo electrónico válido.")]
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Por favor, introduzca su contraseña.")]
+            [Required(ErrorMessage = "Por favor, introduzca su nueva contraseña.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }
+        public class ForgotPasswordViewModel
+        {
+            [Required(ErrorMessage = "El correo electrónico es obligatorio.")]
+            [EmailAddress(ErrorMessage = "Debe ingresar un correo electrónico válido.")]
+            public string Email { get; set; }
+        }
+
     }
 }

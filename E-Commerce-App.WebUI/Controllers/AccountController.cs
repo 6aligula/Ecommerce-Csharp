@@ -40,11 +40,12 @@ namespace E_Commerce_App.WebUI.Controllers
         {
             return View();
         }
-        [Route("forgot-password")]
+        [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
+
         [Route("my-profile")]
         public async Task<IActionResult> Profile()
         {
@@ -121,7 +122,7 @@ namespace E_Commerce_App.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid) // ürün düzenlede ürünün aktifliği değişiyor onu hidden olarak ekle
+            if (ModelState.IsValid) // validar
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
 
@@ -208,24 +209,29 @@ namespace E_Commerce_App.WebUI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(string email)
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (string.IsNullOrEmpty(email)) return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null) return View();
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null) // No confirmes ni niegues la existencia del correo electrónico por razones de seguridad.
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token }, protocol: HttpContext.Request.Scheme);
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            // generate token
-            var url = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token });
+                // Construye el HTML del correo aquí...
+                var htmlMessage = $"Por favor cambia la contraseña de tu cuenta haciendo clic <a href='{callbackUrl}'>aquí</a>.";
 
-            // email 
-            var siteUrl = "https://localhost:5001";
-            var html = $"Por favor cambie la contraseña de su cuenta. <a href='{siteUrl + url}'>linke</a> Haga clic aquí.";
-            //await _emailSender.SendEmailAsync(Email, "Cambiar la contraseña.", html);
+                await _emailSender.SendEmailAsync(model.Email, "Restablecer contraseña", htmlMessage);
+            }
 
-            return View();
+            // Independientemente de si el usuario existe o no, muestra el mismo mensaje.
+            return View("ForgotPasswordConfirmation");
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
