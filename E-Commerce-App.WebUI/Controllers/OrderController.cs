@@ -135,6 +135,11 @@ namespace E_Commerce_App.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Checkout()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                // Opción 1: Redirigir al usuario a la página de inicio de sesión
+                return RedirectToAction("Register", "Account");
+            }
             var cart = await CartHelper.GetProductsFromCart(_cartService, _userManager, User);
             ViewData["CartItemLength"] = cart.CartItems.Count;
             var model = new OrderViewModel() { CartViewModel = cart };

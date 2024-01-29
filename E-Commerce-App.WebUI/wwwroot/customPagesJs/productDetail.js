@@ -70,23 +70,6 @@
         //return false;
     });
 
-    // $(".qtyminus").on("click", function () {
-    //     var now = parseInt($(".qty").val());
-    //     if (now > 1) {
-    //         $(".qty").val(now - 1);
-    //     }
-    // });
-
-    // $(".qtyplus").on("click", function () {
-    //     var now = parseInt($(".qty").val());
-    //     if (now < maxQuantity) {
-    //         $(".qty").val(now + 1);
-    //     } else {
-    //         // Opcional: Alertar al usuario que alcanzó la cantidad máxima
-    //         alert("Has alcanzado la cantidad máxima en stock.");
-    //     }
-    // });
-
 });
 function getChecked() {
     var colorList = document.getElementsByName('color');

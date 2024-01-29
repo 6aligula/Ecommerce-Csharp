@@ -112,6 +112,13 @@ namespace E_Commerce_App.WebUI
                 Configuration["EmailSender:Password"]
                 )
             );
+            // Habilitar soporte para sesiones
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Ajusta según necesidad
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
         }
 
@@ -143,6 +150,8 @@ namespace E_Commerce_App.WebUI
             app.UseRouting();
 
             app.UseAuthorization();
+            // Habilitar el uso de sesiones
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

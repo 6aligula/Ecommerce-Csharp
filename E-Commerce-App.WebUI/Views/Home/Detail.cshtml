@@ -1,4 +1,5 @@
 ﻿@model E_Commerce_App.WebUI.ViewModels.ProductViewModel
+
 @{
     Layout = "_Layout";
     var product = Model.ProductDto;
@@ -13,6 +14,7 @@
     {
         discountedPrice = Convert.ToDouble(product.Price - ((product.Price * product.Discount) / 100));
     }
+    
 }
 @section Css{
     <!-- Product Detail Custom Css -->

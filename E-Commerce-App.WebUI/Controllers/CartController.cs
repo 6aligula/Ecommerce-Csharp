@@ -1,17 +1,21 @@
-﻿using E_Commerce_App.Core.Services;
+﻿using E_Commerce_App.Core.Entities;
+using E_Commerce_App.Core.Services;
 using E_Commerce_App.Core.Shared;
 using E_Commerce_App.WebUI.Helpers;
 using E_Commerce_App.WebUI.Identity;
 using E_Commerce_App.WebUI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace E_Commerce_App.WebUI.Controllers
 {
-    [Authorize]
+   
     public class CartController : Controller
     {
         private ICartService _cartService;
@@ -45,7 +49,11 @@ namespace E_Commerce_App.WebUI.Controllers
 
             if (string.IsNullOrEmpty(userId))
             {
-                return Json(new { success = false, redirectUrl = "/Account/Login" });
+                   // Generar o recuperar un identificador de carrito de la sesión
+                var cartId = HttpContext.Session.GetString("CartId") ?? Guid.NewGuid().ToString();
+                HttpContext.Session.SetString("CartId", cartId);
+                userId = cartId;
+                //return Json(new { success = false, redirectUrl = "/Account/Login" });
             }
 
             // Obtener detalles del producto para verificar la cantidad en stock
@@ -63,6 +71,40 @@ namespace E_Commerce_App.WebUI.Controllers
             }
 
             await _cartService.AddToCart(userId, productId, quantity, price, color);
+
+            return Json(new { success = true, message = "El producto ha sido añadido al carrito." });
+        }
+        public async Task<IActionResult> AddToCartNoRegister(string productId, string color, int quantity, double price)
+        {
+               // Generar o recuperar un identificador de carrito de la sesión
+            var cartId = HttpContext.Session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            HttpContext.Session.SetString("CartId", cartId);
+
+            var product = await _productService.GetProductByIdAsync(productId);
+
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Producto no encontrado." });
+            }
+
+            if (product.CountInStock < quantity)
+            {
+                return Json(new { success = false, message = "No hay suficiente stock disponible." });
+            }
+
+            var cart = HttpContext.Session.GetObject<List<CartItem>>("Cart") ?? new List<CartItem>();
+            var cartItem = cart.FirstOrDefault(c => c.ProductId == productId && c.Color == color);
+
+            if (cartItem != null)
+            {
+                cartItem.Quantity += quantity;
+            }
+            else
+            {
+                cart.Add(new CartItem { ProductId = productId, Color = color, Quantity = quantity, Price = price });
+            }
+
+            HttpContext.Session.SetObject("Cart", cart);
 
             return Json(new { success = true, message = "El producto ha sido añadido al carrito." });
         }
