@@ -1,6 +1,8 @@
-﻿using E_Commerce_App.Core.Entities;
+﻿using AutoMapper;
+using E_Commerce_App.Core.Entities;
 using E_Commerce_App.Core.Services;
 using E_Commerce_App.Core.Shared;
+using E_Commerce_App.Core.Shared.DTOs;
 using E_Commerce_App.WebUI.Helpers;
 using E_Commerce_App.WebUI.Identity;
 using E_Commerce_App.WebUI.ViewModels;
@@ -15,26 +17,45 @@ using System.Threading.Tasks;
 
 namespace E_Commerce_App.WebUI.Controllers
 {
-   
+
     public class CartController : Controller
     {
         private ICartService _cartService;
         private UserManager<User> _userManager;
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public CartController(ICartService cartService, UserManager<User> userManager, IProductService productService)
+
+        public CartController(ICartService cartService, UserManager<User> userManager, IProductService productService, IMapper mapper)
         {
             _cartService = cartService;
             _userManager = userManager;
             _productService = productService;
+            _mapper = mapper;
         }
         [HttpGet]
         [Route("/cart")]
         public async Task<IActionResult> Index()
         {
-            var model = await CartHelper.GetProductsFromCart(_cartService, _userManager, User);
+            CartViewModel model;
+            if (User.Identity.IsAuthenticated)
+            {
+                // var userId = _userManager.GetUserId(User);
+                // var cart = await _cartService.GetCartByUserId(userId);
+                // var cartItemsDto = _mapper.Map<List<CartItemDto>>(cart.CartItems);
+                // model = CartHelper.TransformSessionCartToViewModel(cartItemsDto);
+                model = await CartHelper.GetProductsFromCart(_cartService, _userManager, User);
+                return View(model);
+            }
+            else
+            {
+                // Asumiendo que guardas CartItemDto en la sesión para usuarios no autenticados
+                var sessionCartItems = HttpContext.Session.GetObject<List<CartItemDto>>("Cart") ?? new List<CartItemDto>();
+                model = CartHelper.TransformSessionCartToViewModel(sessionCartItems);
+            }
             return View(model);
         }
+
         [Route("/GetCartItems")]
         public async Task<IActionResult> GetCartItems()
         {
@@ -49,7 +70,7 @@ namespace E_Commerce_App.WebUI.Controllers
 
             if (string.IsNullOrEmpty(userId))
             {
-                   // Generar o recuperar un identificador de carrito de la sesión
+                // Generar o recuperar un identificador de carrito de la sesión
                 var cartId = HttpContext.Session.GetString("CartId") ?? Guid.NewGuid().ToString();
                 HttpContext.Session.SetString("CartId", cartId);
                 userId = cartId;
@@ -74,41 +95,6 @@ namespace E_Commerce_App.WebUI.Controllers
 
             return Json(new { success = true, message = "El producto ha sido añadido al carrito." });
         }
-        public async Task<IActionResult> AddToCartNoRegister(string productId, string color, int quantity, double price)
-        {
-               // Generar o recuperar un identificador de carrito de la sesión
-            var cartId = HttpContext.Session.GetString("CartId") ?? Guid.NewGuid().ToString();
-            HttpContext.Session.SetString("CartId", cartId);
-
-            var product = await _productService.GetProductByIdAsync(productId);
-
-            if (product == null)
-            {
-                return Json(new { success = false, message = "Producto no encontrado." });
-            }
-
-            if (product.CountInStock < quantity)
-            {
-                return Json(new { success = false, message = "No hay suficiente stock disponible." });
-            }
-
-            var cart = HttpContext.Session.GetObject<List<CartItem>>("Cart") ?? new List<CartItem>();
-            var cartItem = cart.FirstOrDefault(c => c.ProductId == productId && c.Color == color);
-
-            if (cartItem != null)
-            {
-                cartItem.Quantity += quantity;
-            }
-            else
-            {
-                cart.Add(new CartItem { ProductId = productId, Color = color, Quantity = quantity, Price = price });
-            }
-
-            HttpContext.Session.SetObject("Cart", cart);
-
-            return Json(new { success = true, message = "El producto ha sido añadido al carrito." });
-        }
-
 
         [HttpPost]
         [Route("/RemoveFromCart/{productId}")]

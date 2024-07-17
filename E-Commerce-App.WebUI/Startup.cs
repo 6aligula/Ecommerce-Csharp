@@ -80,12 +80,13 @@ namespace E_Commerce_App.WebUI
             // API Services
 
             // Automapper
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<MapProfile>();
-            });
-            IMapper mapper = config.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddAutoMapper(typeof(Startup).Assembly, typeof(MapProfile).Assembly);
+            // var config = new MapperConfiguration(cfg =>
+            // {
+            //     cfg.AddProfile<MapProfile>();
+            // });
+            // IMapper mapper = config.CreateMapper();
+            // services.AddSingleton(mapper);
 
             // unitofwork
             services.AddScoped<IUnitOfWork, UnitOfWork>();

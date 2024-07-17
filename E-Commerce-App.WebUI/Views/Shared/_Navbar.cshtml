@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light p-4 fixed-top" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);">
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light p-4 fixed-top"
+    style="box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);">
     <div class="col-md-4">
         @if (User.Identity.IsAuthenticated)
         {
@@ -25,14 +26,17 @@
             </a>
         }
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="col-md-6">
             <form action="/Home/Index">
                 <div class="input-group">
-                    <input type="text" id="searchForm" class="form-control" name="query" value="@ViewData["query"]" placeholder="Escribe el producto que deseas buscar." style="border-radius: 16px 0px 0px 16px;outline: 0 !important;" required />
+                    <input type="text" id="searchForm" class="form-control" name="query" value="@ViewData["query"]"
+                        placeholder="Escribe el producto que deseas buscar."
+                        style="border-radius: 16px 0px 0px 16px;outline: 0 !important;" required />
                     <div class="input-group-append">
                         <button class="btn text-white" type="submit" id="btn-search">
                             <i class="fa fa-search"></i>
@@ -44,31 +48,41 @@
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-5">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/my-orders" id="usernameArea"><i class="fa fa-user"></i>&nbsp; Mi cuenta</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Mi carrito</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/Account/Logout"><i class="fa fa-sign-out-alt"></i>&nbsp;Cerrar sesión</a>
-                    </li>
-                </ul>
-            }
-            else
-            {
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/Account/Login"><i class="fa fa-user"></i> Acceso</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link a-hover" href="/Account/Register"><i class="fa fa-user"></i> Registro</a>
-                    </li>
-                </ul>
-            }
+            
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link a-hover" href="/my-orders" id="usernameArea"><i class="fa fa-user"></i>&nbsp; Mi
+                                cuenta</a>
+                        </li>
+
+                        <li class="nav-item active">
+                            <a class="nav-link a-hover" href="/Account/Logout"><i class="fa fa-sign-out-alt"></i>&nbsp;Cerrar
+                                sesión</a>
+                        </li>
+                                        <!-- El enlace al carrito es accesible para todos los usuarios -->
+                        <li class="nav-item active">
+                            <a class="nav-link a-hover" href="/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Mi carrito</a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link a-hover" href="/Account/Login"><i class="fa fa-user"></i> Acceso</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link a-hover" href="/Account/Register"><i class="fa fa-user"></i> Registro</a>
+                        </li>
+                                        <!-- El enlace al carrito es accesible para todos los usuarios -->
+                        <li class="nav-item active">
+                            <a class="nav-link a-hover" href="/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Mi carrito</a>
+                        </li>
+                    </ul>
+                }
+           
         </div>
     </div>
 </nav>
